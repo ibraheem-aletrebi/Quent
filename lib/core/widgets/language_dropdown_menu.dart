@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quent/core/cubits/language_cubit/language_cubit.dart';
 import 'package:quent/core/cubits/language_cubit/language_state.dart';
+import 'package:quent/core/resources/app_border.dart';
+import 'package:quent/core/resources/app_elevation.dart';
 import 'package:quent/generated/l10n.dart';
 
 class LanguageDropdownMenu extends StatelessWidget {
@@ -13,6 +15,10 @@ class LanguageDropdownMenu extends StatelessWidget {
       builder: (context, state) {
         final currentLang = state.languageCode;
         return DropdownButton<String>(
+          barrierDismissible: true,
+          elevation: AppElevation.e4.toInt(),
+          style: TextTheme.of(context).titleLarge,
+          borderRadius: BorderRadius.circular(AppBorder.b8),
           value: currentLang,
           underline: const SizedBox(),
           onChanged: (String? newValue) {
@@ -21,20 +27,8 @@ class LanguageDropdownMenu extends StatelessWidget {
             }
           },
           items: [
-            DropdownMenuItem(
-              value: 'en',
-              child: Text(
-                S.of(context).En,
-                style: TextTheme.of(context).titleLarge,
-              ),
-            ),
-            DropdownMenuItem(
-              value: 'ar',
-              child: Text(
-                S.of(context).Ar,
-                style: TextTheme.of(context).titleLarge,
-              ),
-            ),
+            DropdownMenuItem(value: 'en', child: Text(S.of(context).En)),
+            DropdownMenuItem(value: 'ar', child: Text(S.of(context).Ar)),
           ],
         );
       },

@@ -13,7 +13,7 @@ class OnBoardingPageContent extends StatelessWidget {
       children: [
         Text(
           onBoardingPageModel.title,
-          style: TextTheme.of(context).bodyLarge?.copyWith(height: 1.2),
+          style: TextTheme.of(context).displayLarge?.copyWith(height: 1.2),
         ),
         const SizedBox(height: 12),
         Text(

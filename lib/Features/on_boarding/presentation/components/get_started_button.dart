@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quent/Features/auth/presentation/views/login_view.dart';
 import 'package:quent/generated/l10n.dart';
 
 class GetStartedButton extends StatelessWidget {
@@ -9,7 +10,11 @@ class GetStartedButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => LoginView()),
+          );
+        },
         style: ElevatedButton.styleFrom(
           elevation: 0,
           padding: const EdgeInsets.symmetric(vertical: 18),

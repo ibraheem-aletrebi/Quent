@@ -24,4 +24,8 @@ class LanguageCubit extends Cubit<LanguageState> {
     currentLangCode = langCode;
     emit(LanguageChanged(languageCode: currentLangCode));
   }
+
+  bool isArabic() {
+    return currentLangCode == 'ar';
+  }
 }

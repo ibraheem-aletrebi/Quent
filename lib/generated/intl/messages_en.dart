@@ -23,8 +23,62 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "Ar": MessageLookupByLibrary.simpleMessage("Arabic"),
+    "ConfirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
     "En": MessageLookupByLibrary.simpleMessage("English"),
+    "FirstName": MessageLookupByLibrary.simpleMessage("First Name"),
+    "LastName": MessageLookupByLibrary.simpleMessage("Last Name"),
+    "PhoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
+    "alreadyHaveAccount": MessageLookupByLibrary.simpleMessage(
+      "Already have an account?",
+    ),
+    "availableToAddCar": MessageLookupByLibrary.simpleMessage(
+      "Available to add car",
+    ),
+    "back": MessageLookupByLibrary.simpleMessage("Back"),
+    "backToLogin": MessageLookupByLibrary.simpleMessage("Back to Login"),
+    "city": MessageLookupByLibrary.simpleMessage("City"),
+    "cityRequired": MessageLookupByLibrary.simpleMessage(
+      "Please enter your city",
+    ),
+    "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
+    "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
+      "Please enter your confirm password",
+    ),
+    "email": MessageLookupByLibrary.simpleMessage("Email"),
+    "emailRequired": MessageLookupByLibrary.simpleMessage(
+      "Please enter your email",
+    ),
+    "emailStep": MessageLookupByLibrary.simpleMessage("Email"),
+    "firstNameRequired": MessageLookupByLibrary.simpleMessage(
+      "Please enter your first name",
+    ),
+    "forgotPassword": MessageLookupByLibrary.simpleMessage("Forgot Password?"),
     "get_started": MessageLookupByLibrary.simpleMessage("Let’s Get Started"),
+    "invalidEmail": MessageLookupByLibrary.simpleMessage(
+      "Please enter a valid email",
+    ),
+    "invalidPassword": MessageLookupByLibrary.simpleMessage(
+      "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+    ),
+    "lastNameRequired": MessageLookupByLibrary.simpleMessage(
+      "Please enter your last name",
+    ),
+    "location": MessageLookupByLibrary.simpleMessage("Location"),
+    "login": MessageLookupByLibrary.simpleMessage("Login"),
+    "loginButton": MessageLookupByLibrary.simpleMessage("LogIn"),
+    "loginTitle": MessageLookupByLibrary.simpleMessage(
+      "Welcome Back Ready to hit the road.",
+    ),
+    "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
+    "newPasswordRequired": MessageLookupByLibrary.simpleMessage(
+      "Please enter a new password",
+    ),
+    "newPasswordStep": MessageLookupByLibrary.simpleMessage("New Password"),
+    "next": MessageLookupByLibrary.simpleMessage("Next"),
+    "no": MessageLookupByLibrary.simpleMessage("no"),
+    "noAccount": MessageLookupByLibrary.simpleMessage(
+      "Don\'t have an account?",
+    ),
     "onboarding_four_body": MessageLookupByLibrary.simpleMessage(
       "Pick up your car and enjoy the ride",
     ),
@@ -49,5 +103,58 @@ class MessageLookup extends MessageLookupByLibrary {
     "onboarding_two_title": MessageLookupByLibrary.simpleMessage(
       "Cars near you",
     ),
+    "otpStep": MessageLookupByLibrary.simpleMessage("OTP"),
+    "password": MessageLookupByLibrary.simpleMessage("Password"),
+    "passwordDoNotMatch": MessageLookupByLibrary.simpleMessage(
+      "Password do not match",
+    ),
+    "passwordRequired": MessageLookupByLibrary.simpleMessage(
+      "Please enter your password",
+    ),
+    "passwordTooShort": MessageLookupByLibrary.simpleMessage(
+      "Password must be at least 8 characters",
+    ),
+    "phoneNumberRequired": MessageLookupByLibrary.simpleMessage(
+      "Please enter your phone number",
+    ),
+    "phoneVerificationBody": MessageLookupByLibrary.simpleMessage(
+      "Enter the code we sent to your phone number to verify your account.",
+    ),
+    "phoneVerificationResend": MessageLookupByLibrary.simpleMessage(
+      "Resend Code",
+    ),
+    "phoneVerificationtitle": MessageLookupByLibrary.simpleMessage(
+      "Phone Verification",
+    ),
+    "rememberMe": MessageLookupByLibrary.simpleMessage("Remember Me"),
+    "resetPasswordNewPasswordSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Enter your new password below to secure your account.",
+    ),
+    "resetPasswordNewPasswordTitle": MessageLookupByLibrary.simpleMessage(
+      "Set a New Password",
+    ),
+    "resetPasswordOtpResend": MessageLookupByLibrary.simpleMessage(
+      "Resend Code",
+    ),
+    "resetPasswordOtpSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Enter the code we sent to your email to reset your password.",
+    ),
+    "resetPasswordOtpTitle": MessageLookupByLibrary.simpleMessage(
+      "Almost there!",
+    ),
+    "resetPasswordRequestBody": MessageLookupByLibrary.simpleMessage(
+      "Enter your email and we’ll guide you through the reset process.",
+    ),
+    "resetPasswordRequestTitle": MessageLookupByLibrary.simpleMessage(
+      "Let’s reset your password",
+    ),
+    "signup": MessageLookupByLibrary.simpleMessage("SignUp"),
+    "signupButton": MessageLookupByLibrary.simpleMessage("SignUp"),
+    "signupTitle": MessageLookupByLibrary.simpleMessage(
+      "Join us and start your journey today.",
+    ),
+    "skipForNow": MessageLookupByLibrary.simpleMessage("Skip for now"),
+    "submit": MessageLookupByLibrary.simpleMessage("Submit"),
+    "yes": MessageLookupByLibrary.simpleMessage("yes"),
   };
 }

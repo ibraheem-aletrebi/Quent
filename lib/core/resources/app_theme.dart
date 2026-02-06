@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:quent/core/resources/app_border.dart';
 import 'package:quent/core/resources/app_color.dart';
+import 'package:quent/core/resources/app_padding.dart';
 import 'package:quent/core/resources/text_styles.dart';
 
 /// Light Theme
@@ -73,17 +76,25 @@ ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   primaryColor: AppColors.primaryColor,
   scaffoldBackgroundColor: AppColors.backgroundDarkColor,
+  disabledColor: AppColors.tertiaryDarkColor,
+  dividerColor: AppColors.dividerDarkColor,
 
-  colorScheme: ColorScheme.fromSeed(
-    seedColor: AppColors.primaryColor,
+  colorScheme: ColorScheme.dark(
+    primary: AppColors.primaryColor,
+    error: AppColors.errorColor,
+    surface: AppColors.surfaceDarkColor,
+    outline: AppColors.surfaceDarkColor,
     brightness: Brightness.dark,
   ),
 
   textTheme: TextTheme(
-    bodyLarge: TextStyles.bold32,
-
+    bodySmall: TextStyles.regular14.copyWith(
+      color: AppColors.secondaryDarkTextColor,
+    ),
     titleLarge: TextStyles.semiBold18,
-
+    titleMedium: TextStyles.semiBold16,
+    displayLarge: TextStyles.bold32,
+    displayMedium: TextStyles.bold20,
     displaySmall: TextStyles.regular16.copyWith(
       color: AppColors.secondaryDarkTextColor,
     ),
@@ -97,7 +108,12 @@ ThemeData darkTheme = ThemeData(
   ),
 
   appBarTheme: AppBarTheme(
-    backgroundColor: AppColors.primaryColor,
+    systemOverlayStyle: const SystemUiOverlayStyle(
+      statusBarColor: AppColors.primaryColor,
+      statusBarIconBrightness: Brightness.light,
+      statusBarBrightness: Brightness.light,
+    ),
+    backgroundColor: AppColors.backgroundDarkColor,
     foregroundColor: AppColors.white,
     elevation: 2,
     titleTextStyle: const TextStyle(
@@ -112,24 +128,64 @@ ThemeData darkTheme = ThemeData(
     style: ElevatedButton.styleFrom(
       backgroundColor: AppColors.primaryColor,
       foregroundColor: AppColors.white,
+      disabledForegroundColor: AppColors.tertiaryDarkColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
     ),
   ),
 
   textButtonTheme: TextButtonThemeData(
-    style: TextButton.styleFrom(foregroundColor: AppColors.primaryColor),
-  ),
-
-  inputDecorationTheme: InputDecorationTheme(
-    filled: true,
-    fillColor: AppColors.surfaceDarkColor,
-    contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-      borderSide: BorderSide.none,
+    style: TextButton.styleFrom(
+      disabledForegroundColor: AppColors.tertiaryDarkColor,
+      foregroundColor: AppColors.primaryColor,
+      textStyle: TextStyles.semiBold16,
     ),
   ),
 
-  iconTheme: IconThemeData(color: AppColors.primaryColor),
+  inputDecorationTheme: InputDecorationTheme(
+    labelStyle: TextStyles.medium16,
+    hintStyle: TextStyles.regular14.copyWith(
+      color: AppColors.secondaryDarkTextColor,
+    ),
+    errorStyle: TextStyles.medium12.copyWith(color: AppColors.errorColor),
+    iconColor: AppColors.secondaryDarkTextColor,
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(AppBorder.b12),
+      borderSide: const BorderSide(color: AppColors.surfaceDarkColor, width: 1),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(AppBorder.b12),
+      borderSide: const BorderSide(color: AppColors.surfaceDarkColor, width: 1),
+    ),
+    disabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(AppBorder.b12),
+      borderSide: BorderSide(
+        color: AppColors.tertiaryDarkColor.withValues(alpha: 0.5),
+        width: 1,
+      ),
+    ),
+    isDense: true,
+    contentPadding: EdgeInsets.symmetric(
+      vertical: AppPadding.p16,
+      horizontal: AppPadding.p24,
+    ),
+    filled: true,
+    fillColor: AppColors.surfaceDarkColor,
+  ),
+
+  checkboxTheme: CheckboxThemeData(
+    checkColor: WidgetStateProperty.all(AppColors.primaryDarkTextColor),
+    fillColor: WidgetStateProperty.resolveWith((state) {
+      if (state.contains(WidgetState.selected)) {
+        return AppColors.primaryColor;
+      }
+      return AppColors.transparent;
+    }),
+    side: BorderSide(color: AppColors.borderDarkColor, width: 2),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(AppBorder.b4),
+    ),
+  ),
+
+  splashFactory: NoSplash.splashFactory,
 );

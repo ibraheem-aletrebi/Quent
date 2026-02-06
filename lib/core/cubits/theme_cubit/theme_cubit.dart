@@ -8,7 +8,7 @@ class ThemeCubit extends Cubit<ThemeState> {
     : super(
         ThemeInitial(
           isDarkMode:
-              PreferenceManager().getBool(StorageKeys.isDarkMode) ?? false,
+              PreferenceManager().getBool(StorageKeys.isDarkMode) ?? true,
         ),
       );
 

@@ -33,22 +33,25 @@ class QentApp extends StatelessWidget {
               designSize: const Size(430, 930),
               minTextAdapt: true,
               splitScreenMode: true,
-              builder: (context, child) => MaterialApp(
-                localizationsDelegates: [
-                  S.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-                supportedLocales: S.delegate.supportedLocales,
-                locale: Locale(state.languageCode),
-                debugShowCheckedModeBanner: false,
-                theme: lightTheme,
-                darkTheme: darkTheme,
-                themeMode: context.read<ThemeCubit>().isDarkMode
-                    ? ThemeMode.dark
-                    : ThemeMode.light,
-                home: const OnBoardingView(),
+              builder: (context, child) => GestureDetector(
+                onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+                child: MaterialApp(
+                  localizationsDelegates: [
+                    S.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
+                  supportedLocales: S.delegate.supportedLocales,
+                  locale: Locale(state.languageCode),
+                  debugShowCheckedModeBanner: false,
+                  theme: lightTheme,
+                  darkTheme: darkTheme,
+                  themeMode: context.read<ThemeCubit>().isDarkMode
+                      ? ThemeMode.dark
+                      : ThemeMode.light,
+                  home: const OnBoardingView(),
+                ),
               ),
             );
           },
