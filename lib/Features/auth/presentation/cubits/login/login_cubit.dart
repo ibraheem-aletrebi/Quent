@@ -10,16 +10,16 @@ class LoginCubit extends Cubit<LoginState> {
   final TextEditingController passwordController = TextEditingController();
   bool rememberMe = false;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  void login() async{
+  void login() async {
     emit(LoginLoading());
-    await  Future.delayed(const Duration(seconds: 4), () {
+    await Future.delayed(const Duration(seconds: 4), () {
       emit(LoginSuccess());
     });
   }
 
   void toggleRememberMe(bool value) {
     rememberMe = value;
-    emit(LoginInitial(rememberMe: value));
+    emit(LoginToggleRememberMe(rememberMe: value));
   }
 
   @override

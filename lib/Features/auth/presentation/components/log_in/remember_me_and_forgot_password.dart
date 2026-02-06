@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quent/Features/auth/presentation/cubits/login/login_cubit.dart';
 import 'package:quent/Features/auth/presentation/views/forgot_password_view.dart';
+import 'package:quent/core/cubits/theme_cubit/theme_cubit.dart';
 import 'package:quent/core/resources/app_color.dart';
 import 'package:quent/generated/l10n.dart';
 
@@ -11,11 +12,14 @@ class RememberMeAndForgotPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: .spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        BlocSelector<LoginCubit, LoginState, bool>(
-          selector: (state) => state.rememberMe,
-          builder: (context, rememberMe) {
+        BlocBuilder<LoginCubit, LoginState>(
+          builder: (context, state) {
+            final rememberMe = state is LoginToggleRememberMe
+                ? state.rememberMe
+                : context.read<LoginCubit>().rememberMe;
+
             return GestureDetector(
               onTap: () =>
                   context.read<LoginCubit>().toggleRememberMe(!rememberMe),
@@ -32,7 +36,9 @@ class RememberMeAndForgotPassword extends StatelessWidget {
                   Text(
                     S.of(context).rememberMe,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: AppColors.secondaryDarkTextColor,
+                      color: context.watch<ThemeCubit>().isDarkMode
+                          ? AppColors.secondaryLightTextColor
+                          : AppColors.secondaryDarkTextColor,
                     ),
                   ),
                 ],

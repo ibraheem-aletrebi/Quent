@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quent/core/cubits/language_cubit/language_cubit.dart';
 import 'package:quent/core/cubits/language_cubit/language_state.dart';
+import 'package:quent/core/cubits/theme_cubit/theme_cubit.dart';
 import 'package:quent/core/resources/app_border.dart';
 import 'package:quent/core/resources/app_elevation.dart';
 import 'package:quent/generated/l10n.dart';
@@ -18,6 +19,12 @@ class LanguageDropdownMenu extends StatelessWidget {
           barrierDismissible: true,
           elevation: AppElevation.e4.toInt(),
           style: TextTheme.of(context).titleLarge,
+          icon: Icon(
+            Icons.arrow_drop_down_outlined,
+            color: context.watch<ThemeCubit>().isDarkMode
+                ? Colors.white
+                : Colors.black,
+          ),
           borderRadius: BorderRadius.circular(AppBorder.b8),
           value: currentLang,
           underline: const SizedBox(),
