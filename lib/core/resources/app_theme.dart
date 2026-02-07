@@ -8,7 +8,7 @@ import 'package:quent/core/resources/text_styles.dart';
 ThemeData lightTheme = ThemeData(
   primaryColor: AppColors.primaryColor,
   scaffoldBackgroundColor: AppColors.backgroundLightColor,
-  disabledColor: AppColors.tertiaryLightColor,
+  disabledColor: AppColors.surfaceLightColor,
   dividerColor: AppColors.dividerLightColor,
 
   colorScheme: ColorScheme.light(
@@ -129,7 +129,7 @@ ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   primaryColor: AppColors.primaryColor,
   scaffoldBackgroundColor: AppColors.backgroundDarkColor,
-  disabledColor: AppColors.tertiaryDarkColor,
+  disabledColor: AppColors.surfaceDarkColor,
   dividerColor: AppColors.dividerDarkColor,
 
   colorScheme: ColorScheme.dark(
@@ -212,10 +212,7 @@ ThemeData darkTheme = ThemeData(
     ),
     disabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(AppBorder.b12),
-      borderSide: BorderSide(
-        color: AppColors.tertiaryDarkColor.withValues(alpha: 0.5),
-        width: 1,
-      ),
+      borderSide: BorderSide(color: AppColors.surfaceDarkColor, width: 1),
     ),
     isDense: true,
     contentPadding: EdgeInsets.symmetric(

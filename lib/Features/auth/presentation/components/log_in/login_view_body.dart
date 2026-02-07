@@ -4,7 +4,7 @@ import 'package:quent/Features/auth/presentation/components/log_in/login_form.da
 import 'package:quent/Features/auth/presentation/components/log_in/remember_me_and_forgot_password.dart';
 import 'package:quent/core/resources/app_padding.dart';
 import 'package:quent/core/resources/app_size.dart';
-import 'package:quent/core/widgets/theme_language_switcher.dart';
+import 'package:quent/core/widgets/custom_logo.dart';
 import 'package:quent/generated/l10n.dart';
 
 class LoginViewBody extends StatelessWidget {
@@ -15,9 +15,9 @@ class LoginViewBody extends StatelessWidget {
     return SingleChildScrollView(
       padding: EdgeInsets.all(AppPadding.p16),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ThemeLanguageSwitcher(),
+          CustomLogo(),
           SizedBox(height: AppSize.s32),
           Text(
             S.of(context).loginTitle,

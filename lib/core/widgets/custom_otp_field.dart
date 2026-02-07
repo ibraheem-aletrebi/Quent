@@ -53,7 +53,7 @@ class CustomOTPField extends StatelessWidget {
       decoration: BoxDecoration(
         color: backgroundColor ?? colorScheme.surface,
         borderRadius: BorderRadius.circular(borderRadius ?? AppBorder.b12),
-        border: Border.all(color: borderColor ?? colorScheme.outline),
+        border: Border.all(color: borderColor ?? colorScheme.outline, width: 2),
       ),
     );
 
@@ -69,13 +69,19 @@ class CustomOTPField extends StatelessWidget {
     final submittedPinTheme = defaultPinTheme.copyWith(
       decoration: defaultPinTheme.decoration!.copyWith(
         color: submittedBackgroundColor ?? colorScheme.surface,
-        border: Border.all(color: focusedBorderColor ?? colorScheme.primary),
+        border: Border.all(
+          color: focusedBorderColor ?? colorScheme.primary,
+          width: 2,
+        ),
       ),
     );
 
     final errorPinTheme = defaultPinTheme.copyWith(
       decoration: defaultPinTheme.decoration!.copyWith(
-        border: Border.all(color: errorBorderColor ?? colorScheme.error),
+        border: Border.all(
+          color: errorBorderColor ?? colorScheme.error,
+          width: 2,
+        ),
       ),
     );
 

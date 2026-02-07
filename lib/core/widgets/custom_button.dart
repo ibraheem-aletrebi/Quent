@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quent/core/resources/app_color.dart';
 import 'package:quent/core/resources/app_elevation.dart';
 import 'package:quent/core/resources/app_size.dart';
 
@@ -41,12 +42,16 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton.icon(
         onPressed: isButtonEnabled ? onPressed : null,
         style: ElevatedButton.styleFrom(
+          disabledBackgroundColor: disabledColor ?? AppColors.disabledColor,
           backgroundColor: backgroundColor ?? Theme.of(context).primaryColor,
           shape: RoundedRectangleBorder(
+            side: BorderSide(
+              color: borderColor ?? Colors.transparent,
+              width: 2,
+            ),
             borderRadius: BorderRadius.circular(borderRadius ?? AppSize.s8),
           ),
-          side: BorderSide(color: borderColor ?? Colors.transparent),
-          elevation: isButtonEnabled ? AppElevation.e2 : AppElevation.e0,
+          elevation: AppElevation.e0,
         ),
         icon: isLoading
             ? SizedBox(

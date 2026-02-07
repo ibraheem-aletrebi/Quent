@@ -21,6 +21,7 @@ class PhoneVerificationActions extends StatelessWidget {
         SizedBox(height: AppSize.s16),
         CustomButton(
           borderColor: AppColors.primaryColor,
+          textColor: AppColors.primaryColor,
           backgroundColor: AppColors.transparent,
           text: S.of(context).skipForNow,
           onPressed: () {},

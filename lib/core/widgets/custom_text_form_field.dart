@@ -137,19 +137,16 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             ? TextDirection.rtl
             : TextDirection.ltr);
 
-    // Initialize controller
     if (widget.controller == null) {
       _controller = TextEditingController(text: widget.initialValue);
       _isControllerOwned = true;
     } else {
       _controller = widget.controller!;
-      // Don't set initialValue if controller is provided
       if (widget.initialValue != null && _controller.text.isEmpty) {
         _controller.text = widget.initialValue!;
       }
     }
 
-    // Initialize focus node
     if (widget.focusNode == null) {
       _focusNode = FocusNode();
       _isFocusNodeOwned = true;
@@ -159,10 +156,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
     _obscureText = widget.isPassword;
 
-    // Set up listeners
     _setupListeners();
 
-    // Initialize validation state for prefilled values
     if (_controller.text.isNotEmpty) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted) {
@@ -186,7 +181,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   void didUpdateWidget(CustomTextFormField oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    // Handle controller change
     if (widget.controller != oldWidget.controller) {
       _removeListeners();
 
@@ -195,7 +189,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         _controller.dispose();
       }
 
-      // Set up new controller
+      
       if (widget.controller == null) {
         _controller = TextEditingController(text: widget.initialValue);
         _isControllerOwned = true;
@@ -211,16 +205,14 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       }
     }
 
-    // Handle focus node change
+    
     if (widget.focusNode != oldWidget.focusNode) {
       _focusNode.removeListener(_handleFocusChange);
 
-      // Dispose old focus node if we owned it
       if (_isFocusNodeOwned && oldWidget.focusNode == null) {
         _focusNode.dispose();
       }
 
-      // Set up new focus node
       if (widget.focusNode == null) {
         _focusNode = FocusNode();
         _isFocusNodeOwned = true;
@@ -232,7 +224,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       _focusNode.addListener(_handleFocusChange);
     }
 
-    // Handle password toggle change
     if (widget.isPassword != oldWidget.isPassword) {
       _obscureText = widget.isPassword;
     }
@@ -247,10 +238,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       if (!widget.enabled) {
         _borderState = BorderState.disabled;
       } else if (!hasFocus && _controller.text.isNotEmpty) {
-        // Lost focus with content - validate immediately
         _runValidation(immediate: true);
       } else if (hasFocus) {
-        // Gained focus - show focused state
         if (_validationState == ValidationState.error) {
           _borderState = BorderState.error;
         } else {
@@ -261,7 +250,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           _validationState = ValidationState.typing;
         }
       } else {
-        // Lost focus without content - normal state
         if (_controller.text.isEmpty) {
           _borderState = BorderState.normal;
           _validationState = ValidationState.none;
@@ -272,16 +260,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
   void _handleTextChanged() {
     if (!mounted) return;
-
     final text = _controller.text;
-
-    // Cancel any pending validation
     _validationTimer?.cancel();
-
-    // Notify parent immediately
     widget.onChanged?.call(text);
-
-    // Handle empty text efficiently
     if (text.isEmpty) {
       if (mounted) {
         setState(() {
@@ -294,8 +275,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       }
       return;
     }
-
-    // Update UI for typing state
     if (_validationState != ValidationState.typing) {
       if (mounted) {
         setState(() {
@@ -307,7 +286,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       }
     }
 
-    // Schedule delayed validation (debouncing)
     if (widget.validationDelay.inMilliseconds > 0) {
       _validationTimer = Timer(widget.validationDelay, () {
         if (mounted && _focusNode.hasFocus) {
@@ -324,8 +302,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     if (!mounted) return;
 
     final text = _controller.text;
-
-    // Skip validation for empty text (except for initial validation)
     if (text.isEmpty && !initial) {
       if (mounted) {
         setState(() {
@@ -339,8 +315,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       }
       return;
     }
-
-    // Show loading if configured
     if (widget.showLoadingOnValidation && !immediate && mounted) {
       setState(() => _isValidating = true);
     }
@@ -437,8 +411,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
   Widget _buildSuffixIcons(BuildContext context) {
     final List<Widget> icons = [];
-
-    // Loading indicator during validation
     if (_isValidating && widget.showLoadingOnValidation) {
       icons.add(
         SizedBox(
@@ -451,7 +423,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         ),
       );
     }
-    // Validation icons (only when not focused and not typing)
     else if (widget.showValidationIcons &&
         !_focusNode.hasFocus &&
         !_isValidating) {
@@ -475,8 +446,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         );
       }
     }
-
-    // Clear button (only when focused and has text)
     if (widget.showClearButton &&
         _controller.text.isNotEmpty &&
         _focusNode.hasFocus &&
@@ -493,8 +462,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         ),
       );
     }
-
-    // Password visibility toggle
     if (widget.isPassword && !_isValidating) {
       icons.add(
         IconButton(
@@ -511,8 +478,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         ),
       );
     }
-
-    // Custom suffix icon (if no other icons are showing)
     if (icons.isEmpty && widget.suffixIcon != null) {
       return widget.suffixIcon!;
     }
@@ -520,8 +485,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     if (icons.isEmpty) {
       return const SizedBox.shrink();
     }
-
-    // Return single icon or row of icons
     if (icons.length == 1) {
       return Padding(
         padding: const EdgeInsets.only(right: 12),
@@ -546,11 +509,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   }
 
   String? _getErrorText() {
-    // Don't show error while typing or validating
     if (_validationState == ValidationState.typing || _isValidating) {
       return null;
     }
-
     return _validationError;
   }
 
@@ -719,7 +680,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   InputBorder _buildDisabledBorder(BuildContext context) {
     return OutlineInputBorder(
       borderSide: BorderSide(
-        color: Theme.of(context).disabledColor.withValues(alpha: .3),
+        color: Theme.of(context).disabledColor,
         width: 2,
       ),
       borderRadius: widget.borderRadius ?? BorderRadius.circular(AppBorder.b12),
