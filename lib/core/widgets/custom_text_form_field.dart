@@ -189,7 +189,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         _controller.dispose();
       }
 
-      
       if (widget.controller == null) {
         _controller = TextEditingController(text: widget.initialValue);
         _isControllerOwned = true;
@@ -205,7 +204,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       }
     }
 
-    
     if (widget.focusNode != oldWidget.focusNode) {
       _focusNode.removeListener(_handleFocusChange);
 
@@ -422,8 +420,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           ),
         ),
       );
-    }
-    else if (widget.showValidationIcons &&
+    } else if (widget.showValidationIcons &&
         !_focusNode.hasFocus &&
         !_isValidating) {
       if (_validationState == ValidationState.valid) {
@@ -453,6 +450,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         widget.enabled) {
       icons.add(
         IconButton(
+          style: IconButton.styleFrom(backgroundColor: AppColors.transparent),
           icon: const Icon(Icons.clear_rounded),
           onPressed: _clearText,
           iconSize: AppSize.s20,
@@ -465,6 +463,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     if (widget.isPassword && !_isValidating) {
       icons.add(
         IconButton(
+          style: IconButton.styleFrom(backgroundColor: AppColors.transparent),
           icon: Icon(
             _obscureText
                 ? Icons.visibility_off_rounded
@@ -679,10 +678,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
   InputBorder _buildDisabledBorder(BuildContext context) {
     return OutlineInputBorder(
-      borderSide: BorderSide(
-        color: Theme.of(context).disabledColor,
-        width: 2,
-      ),
+      borderSide: BorderSide(color: Theme.of(context).disabledColor, width: 2),
       borderRadius: widget.borderRadius ?? BorderRadius.circular(AppBorder.b12),
       gapPadding: 0,
     );

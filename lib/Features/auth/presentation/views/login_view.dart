@@ -4,6 +4,7 @@ import 'package:quent/Features/auth/presentation/components/auth_action_promp.da
 import 'package:quent/Features/auth/presentation/components/log_in/login_view_body_bloc_consumer.dart';
 import 'package:quent/Features/auth/presentation/cubits/login/login_cubit.dart';
 import 'package:quent/Features/auth/presentation/views/signup_view.dart';
+import 'package:quent/extensions/navigation_extension.dart';
 import 'package:quent/generated/l10n.dart';
 
 class LoginView extends StatefulWidget {
@@ -25,9 +26,7 @@ class _LoginViewState extends State<LoginView> {
           leadingText: S.of(context).noAccount,
           actionText: S.of(context).signup,
           onActionTap: () {
-            Navigator.of(
-              context,
-            ).push(MaterialPageRoute(builder: (context) => const SignupView()));
+            context.push(const SignupView());
           },
         ),
       ),

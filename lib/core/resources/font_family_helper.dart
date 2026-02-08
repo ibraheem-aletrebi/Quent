@@ -1,4 +1,4 @@
-import 'package:quent/core/services/local/preference_manager.dart';
+import 'dart:ui';
 
 class FontFamilyHelper {
   FontFamilyHelper._();
@@ -6,16 +6,9 @@ class FontFamilyHelper {
   static const String alexandria = 'Alexandria';
   static const String nunito = 'Nunito';
 
- static String getLocalizedFontFamily() {
-    final languageCode = PreferenceManager().getString('languageCode') ?? 'en';
-    switch (languageCode) {
-      case 'ar':
-        return alexandria;
-      case 'en':
-        return nunito;
-      default:
-        return nunito;
-    }
+  static String fromLocale(Locale locale) {
+    return locale.languageCode == 'ar'
+        ? alexandria
+        : nunito;
   }
-
 }

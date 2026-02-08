@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quent/Features/auth/presentation/views/login_view.dart';
+import 'package:quent/core/constants/storage_keys.dart';
+import 'package:quent/core/services/local/preference_manager.dart';
+import 'package:quent/extensions/navigation_extension.dart';
 import 'package:quent/generated/l10n.dart';
 
 class GetStartedButton extends StatelessWidget {
@@ -11,9 +14,8 @@ class GetStartedButton extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => LoginView()),
-          );
+          PreferenceManager().setBool(StorageKeys.isShownOnboarding, true);
+          context.pushReplacement(const LoginView());
         },
         style: ElevatedButton.styleFrom(
           elevation: 0,

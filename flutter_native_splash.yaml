@@ -93,10 +93,10 @@ flutter_native_splash:
   # branding position:
   # you can use bottom, bottomRight, and bottomLeft. The default values is 
   # bottom if not specified or specified something else.
-  #branding_mode: bottom                # default bottom
-  #branding_bottom_padding: 24          # default 0
-  #branding_bottom_padding_android: 24  # default 0
-  #branding_bottom_padding_ios: 24      # default 0
+  branding_mode: bottom                # default bottom
+  branding_bottom_padding: 48         # default 0
+  branding_bottom_padding_android: 48 # default 0
+  branding_bottom_padding_ios: 48      # default 0
   # branding bottom padding web is not available yet.
 
   # The screen orientation can be set in Android with the android_screen_orientation parameter.
