@@ -38,7 +38,7 @@ ThemeData buildLightTheme(Locale locale) {
     iconButtonTheme: IconButtonThemeData(
       style: IconButton.styleFrom(
         foregroundColor: AppColors.black,
-        backgroundColor: AppColors.surfaceLightColor,
+        backgroundColor: AppColors.transparent,
       ),
     ),
 
@@ -167,7 +167,7 @@ ThemeData buildDarkTheme(Locale locale) {
     iconButtonTheme: IconButtonThemeData(
       style: IconButton.styleFrom(
         foregroundColor: AppColors.white,
-        backgroundColor: AppColors.surfaceDarkColor,
+        backgroundColor: AppColors.transparent,
       ),
     ),
 

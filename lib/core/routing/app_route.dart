@@ -4,4 +4,5 @@ class AppRoutes {
   static const String signUp = '/signUp';
   static const String phoneVerification = '/phoneVerification';
   static const String forgotPassword = '/forgotPassword';
+  static const String main = '/main';
 }

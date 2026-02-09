@@ -450,7 +450,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         widget.enabled) {
       icons.add(
         IconButton(
-          style: IconButton.styleFrom(backgroundColor: AppColors.transparent),
           icon: const Icon(Icons.clear_rounded),
           onPressed: _clearText,
           iconSize: AppSize.s20,
@@ -463,7 +462,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     if (widget.isPassword && !_isValidating) {
       icons.add(
         IconButton(
-          style: IconButton.styleFrom(backgroundColor: AppColors.transparent),
           icon: Icon(
             _obscureText
                 ? Icons.visibility_off_rounded
