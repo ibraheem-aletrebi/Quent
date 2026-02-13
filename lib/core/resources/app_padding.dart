@@ -2,6 +2,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppPadding {
   AppPadding._();
+  static final double p4 = 4.0.sp;
   static final double p8 = 8.0.sp;
   static final double p12 = 12.0.sp;
   static final double p16 = 16.0.sp;

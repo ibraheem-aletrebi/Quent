@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,32 +15,52 @@ class CustomBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = context.watch<ThemeCubit>().isDarkMode;
+
     return BlocBuilder<LayoutCubit, LayoutState>(
       builder: (context, state) {
         final layoutCubit = context.read<LayoutCubit>();
         final currentIndex = layoutCubit.currentIndex;
-        return Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: AppPadding.p16,
-            vertical: AppPadding.p12,
-          ),
-          decoration: BoxDecoration(
-            color: isDarkMode
-                ? AppColors.surfaceDarkColor
-                : AppColors.surfaceLightColor,
-            borderRadius: BorderRadius.circular(AppBorder.b24),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: List.generate(
-              layoutCubit.bottomNavIcons.length,
-              (index) => NavItem(
-                icon: layoutCubit.bottomNavIcons[index],
-                isSelected: index == currentIndex,
-                onTap: () {
-                  HapticFeedback.lightImpact();
-                  layoutCubit.changeIndex(index);
-                },
+
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(AppBorder.b24),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 5),
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: AppPadding.p16,
+                vertical: AppPadding.p12,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(AppBorder.b24),
+                gradient: LinearGradient(
+                  colors: isDarkMode
+                      ? [
+                          AppColors.white.withValues(alpha: 0.02),
+                          AppColors.white.withValues(alpha: 0.01),
+                        ]
+                      : [
+                          AppColors.black.withValues(alpha: 0.5),
+                          AppColors.black.withValues(alpha: 0.2),
+                        ],
+                ),
+                border: Border.all(
+                  color: AppColors.white.withValues(alpha: 0.2),
+                  width: 1.2,
+                ),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: List.generate(
+                  layoutCubit.bottomNavIcons.length,
+                  (index) => NavItem(
+                    icon: layoutCubit.bottomNavIcons[index],
+                    isSelected: index == currentIndex,
+                    onTap: () {
+                      HapticFeedback.lightImpact();
+                      layoutCubit.changeIndex(index);
+                    },
+                  ),
+                ),
               ),
             ),
           ),

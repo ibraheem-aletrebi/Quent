@@ -28,13 +28,14 @@ ThemeData buildLightTheme(Locale locale) {
       ),
       titleLarge: TextStyles.semiBold18,
       titleMedium: TextStyles.semiBold16,
+      titleSmall: TextStyles.semiBold14,
       displayLarge: TextStyles.bold32,
       displayMedium: TextStyles.bold20,
       displaySmall: TextStyles.regular16.copyWith(
         color: AppColors.secondaryLightTextColor,
       ),
     ),
-
+    iconTheme: IconThemeData(color: AppColors.black),
     iconButtonTheme: IconButtonThemeData(
       style: IconButton.styleFrom(
         foregroundColor: AppColors.black,
@@ -66,6 +67,7 @@ ThemeData buildLightTheme(Locale locale) {
         disabledForegroundColor: AppColors.tertiaryLightColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+        splashFactory: NoSplash.splashFactory,
       ),
     ),
 
@@ -157,6 +159,7 @@ ThemeData buildDarkTheme(Locale locale) {
       ),
       titleLarge: TextStyles.semiBold18,
       titleMedium: TextStyles.semiBold16,
+      titleSmall: TextStyles.semiBold14,
       displayLarge: TextStyles.bold32,
       displayMedium: TextStyles.bold20,
       displaySmall: TextStyles.regular16.copyWith(
@@ -171,6 +174,7 @@ ThemeData buildDarkTheme(Locale locale) {
       ),
     ),
 
+    iconTheme: const IconThemeData(color: Colors.white),
     appBarTheme: AppBarTheme(
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarColor: AppColors.primaryColor,
@@ -195,6 +199,7 @@ ThemeData buildDarkTheme(Locale locale) {
         disabledForegroundColor: AppColors.tertiaryDarkColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+        splashFactory: NoSplash.splashFactory,
       ),
     ),
 

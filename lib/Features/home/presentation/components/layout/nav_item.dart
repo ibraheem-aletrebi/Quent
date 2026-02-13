@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quent/core/resources/app_border.dart';
 import 'package:quent/core/resources/app_color.dart';
+import 'package:quent/core/resources/app_padding.dart';
 
 class NavItem extends StatelessWidget {
   final IconData icon;
@@ -22,12 +23,15 @@ class NavItem extends StatelessWidget {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 250),
         curve: Curves.easeOutCubic,
-        padding: const EdgeInsets.all(10),
+        padding: EdgeInsets.symmetric(
+          horizontal: AppPadding.p24,
+          vertical: AppPadding.p12,
+        ),
         decoration: BoxDecoration(
           color: isSelected
               ? AppColors.white.withValues(alpha: 0.2)
-              : Colors.transparent,
-          borderRadius: BorderRadius.circular(AppBorder.b12),
+              : AppColors.transparent,
+          borderRadius: BorderRadius.circular(AppBorder.b16),
         ),
         child: AnimatedScale(
           scale: isSelected ? 1.2 : 1.1,
@@ -35,7 +39,9 @@ class NavItem extends StatelessWidget {
           child: Icon(
             icon,
             size: 24,
-            color: isSelected ? AppColors.white : AppColors.secondaryColor,
+            color: isSelected
+                ? AppColors.white
+                : AppColors.white.withValues(alpha: .5),
           ),
         ),
       ),

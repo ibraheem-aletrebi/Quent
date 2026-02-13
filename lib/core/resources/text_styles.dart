@@ -16,6 +16,9 @@ class TextStyles {
       _buildTextStyle(fontSize: AppSize.s16, fontWeight: FontWeightHelper.regular);
 
   // Medium
+
+  static final TextStyle medium10 =
+      _buildTextStyle(fontSize: AppSize.s10, fontWeight: FontWeightHelper.medium);
   static final TextStyle medium12 =
       _buildTextStyle(fontSize: AppSize.s12, fontWeight: FontWeightHelper.medium);
 

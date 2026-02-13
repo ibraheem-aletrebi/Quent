@@ -11,6 +11,7 @@ class MainLayoutView extends StatelessWidget {
   Widget build(BuildContext context) {
     final layoutCubit = context.watch<LayoutCubit>();
     return Scaffold(
+      extendBody: true,
       body: SafeArea(
         child: Stack(
           children: [
@@ -23,7 +24,7 @@ class MainLayoutView extends StatelessWidget {
             Positioned(
               left: AppMargin.m16,
               right: AppMargin.m16,
-              bottom: AppMargin.m16,
+              bottom: 0,
               child: CustomBottomNavigationBar(),
             ),
           ],

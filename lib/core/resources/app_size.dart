@@ -6,6 +6,7 @@ class AppSize {
   static final double s2 = 2.0.sp;
   static final double s4 = 4.0.sp;
   static final double s8 = 8.0.sp;
+  static final double s10 = 10.0.sp;
   static final double s12 = 12.0.sp;
   static final double s14 = 14.0.sp;
   static final double s16 = 16.0.sp;
@@ -21,4 +22,8 @@ class AppSize {
   static final double s65 = 65.0.sp;
   static final double s70 = 70.0.sp;
   static final double s80 = 80.0.sp;
+  static final double s90 = 90.0.sp;
+  static final double s100 = 100.0.sp;
+  static final double s120 = 120.0.sp;
+  static final double s150 = 150.0.sp;
 }
