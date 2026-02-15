@@ -6,10 +6,10 @@ import 'package:quent/Features/auth/presentation/views/phone_verification_view.d
 import 'package:quent/Features/auth/presentation/views/signup_view.dart';
 import 'package:quent/Features/home/presentation/cubits/layout/layout_cubit.dart';
 import 'package:quent/Features/on_boarding/presentation/views/on_boarding_view.dart';
-import 'package:quent/core/constants/storage_keys.dart';
+import 'package:quent/core/constants/hive_keys.dart';
 import 'package:quent/core/routing/app_route.dart';
-import 'package:quent/core/services/local/preference_manager.dart';
 import 'package:quent/Features/home/presentation/view/main_layout_view.dart';
+import 'package:quent/core/services/local/local_storage_helper.dart';
 
 class RouteConfigration {
   RouteConfigration._();
@@ -46,8 +46,16 @@ class RouteConfigration {
   }
 
   String getInitialRoute() {
-    bool isShownOnboarding =
-        PreferenceManager().getBool(StorageKeys.isShownOnboarding) ?? false;
-    return isShownOnboarding ? AppRoutes.main : AppRoutes.onboarding;
+    final bool isOnboardingShown =
+        LocalStorageHelper().getValue<bool>(HiveKeys.isShowOnboarding) ?? false;
+    final bool rememberMe =
+        LocalStorageHelper().getValue<bool>(HiveKeys.rememberMe) ?? false;
+    if (!isOnboardingShown) {
+      return AppRoutes.onboarding;
+    }
+    if (rememberMe ) {
+      return AppRoutes.main;
+    }
+    return AppRoutes.login;
   }
 }

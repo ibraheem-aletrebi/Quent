@@ -26,4 +26,5 @@ class AppSize {
   static final double s100 = 100.0.sp;
   static final double s120 = 120.0.sp;
   static final double s150 = 150.0.sp;
+  static final double s200 = 200.0.sp;
 }

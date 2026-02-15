@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quent/Features/auth/presentation/components/log_in/login_view_body.dart';
 import 'package:quent/Features/auth/presentation/cubits/login/login_cubit.dart';
+import 'package:quent/core/extensions/navigation_extension.dart';
+import 'package:quent/core/extensions/snack_bar_extenstion.dart';
+import 'package:quent/core/routing/app_route.dart';
+import 'package:quent/core/widgets/custom_snack_bar.dart';
 
 class LoginViewBodyBlocConsumer extends StatelessWidget {
   const LoginViewBodyBlocConsumer({super.key});
@@ -10,7 +14,15 @@ class LoginViewBodyBlocConsumer extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
-        if (state is LoginSuccess) {}
+        if (state is LoginSuccess) {
+          context.pushReplacementNamed(AppRoutes.main);
+        }
+        if (state is LoginError) {
+          context.showSnackbar(
+            state.apiErrorModel.message,
+            type: SnackbarType.error,
+          );
+        }
       },
       builder: (context, state) {
         return LoginViewBody();

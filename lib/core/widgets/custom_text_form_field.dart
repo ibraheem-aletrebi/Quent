@@ -1,11 +1,10 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:quent/core/constants/storage_keys.dart';
+import 'package:quent/core/constants/hive_keys.dart';
 import 'package:quent/core/resources/app_border.dart';
 import 'package:quent/core/resources/app_color.dart';
 import 'package:quent/core/resources/app_size.dart';
-import 'package:quent/core/services/local/preference_manager.dart';
+import 'package:quent/core/services/local/local_storage_helper.dart';
 
 enum ValidationState { none, typing, valid, error }
 
@@ -133,7 +132,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     super.initState();
     _textDirection =
         widget.textDirection ??
-        (PreferenceManager().getString(StorageKeys.languageCode) == 'ar'
+        (LocalStorageHelper().getValue<String>(HiveKeys.languageCode) == 'ar'
             ? TextDirection.rtl
             : TextDirection.ltr);
 
@@ -184,7 +183,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     if (widget.controller != oldWidget.controller) {
       _removeListeners();
 
-      // Dispose old controller if we owned it
       if (_isControllerOwned && oldWidget.controller == null) {
         _controller.dispose();
       }
@@ -317,10 +315,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       setState(() => _isValidating = true);
     }
 
-    // Run validation
     final error = widget.validator?.call(text);
 
-    // Small delay for better UX (shows loading briefly)
     if (widget.showLoadingOnValidation && !immediate) {
       await Future.delayed(const Duration(milliseconds: 150));
     }
@@ -371,7 +367,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   Color _getBorderColor(BuildContext context) {
     final theme = Theme.of(context);
     final isDarkMode =
-        PreferenceManager().getBool(StorageKeys.isDarkMode) ?? false;
+        LocalStorageHelper().getValue<bool>(HiveKeys.isDarkMode) ?? false;
 
     Color color;
 
@@ -395,7 +391,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         break;
     }
 
-    // Apply hover effect
     if (_isHovering && widget.enabled) {
       color = Color.lerp(
         color,
@@ -516,8 +511,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   void dispose() {
     _validationTimer?.cancel();
     _removeListeners();
-
-    // Dispose only if we created these resources
     if (_isControllerOwned) {
       _controller.dispose();
     }
@@ -536,7 +529,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        // Label with optional character count
         if (widget.labelText != null ||
             (widget.maxLength != null && widget.showCounter))
           Padding(
@@ -553,7 +545,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                     ),
                   ),
 
-                // Character count (if maxLength is set and showCounter is true)
                 if (widget.maxLength != null && widget.showCounter)
                   Padding(
                     padding: EdgeInsets.only(
@@ -573,7 +564,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             ),
           ),
 
-        // The text field
         TextFormField(
           controller: _controller,
           focusNode: _focusNode,
@@ -634,7 +624,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           ),
         ),
 
-        // Success message
         if (_validationState == ValidationState.valid &&
             widget.successMessage != null &&
             !_focusNode.hasFocus)

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quent/Features/auth/presentation/views/login_view.dart';
-import 'package:quent/core/constants/storage_keys.dart';
-import 'package:quent/core/services/local/preference_manager.dart';
-import 'package:quent/extensions/navigation_extension.dart';
+import 'package:quent/core/constants/hive_keys.dart';
+import 'package:quent/core/services/local/local_storage_helper.dart';
+import 'package:quent/core/extensions/navigation_extension.dart';
 import 'package:quent/generated/l10n.dart';
 
 class GetStartedButton extends StatelessWidget {
@@ -14,7 +14,7 @@ class GetStartedButton extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () {
-          PreferenceManager().setBool(StorageKeys.isShownOnboarding, true);
+          LocalStorageHelper().setValue<bool>(HiveKeys.isShowOnboarding, true);
           context.pushReplacement(const LoginView());
         },
         style: ElevatedButton.styleFrom(
