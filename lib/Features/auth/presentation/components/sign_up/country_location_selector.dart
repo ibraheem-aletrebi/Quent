@@ -1,0 +1,79 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quent/Features/auth/data/repo/signup_repo.dart';
+import 'package:quent/Features/auth/presentation/cubits/signup/signup_cubit.dart';
+import 'package:quent/core/di/services_locator.dart';
+import 'package:quent/core/models/country_model.dart';
+import 'package:quent/core/models/location_model.dart';
+import 'package:quent/core/resources/app_size.dart';
+import 'package:quent/core/utils/country_code_to_flag.dart';
+import 'package:quent/core/widgets/paginated_search_dropdown/cubit/paginated_dropdown_cubit.dart';
+import 'package:quent/core/widgets/paginated_search_dropdown/paginated_search_dropdown.dart';
+import 'package:quent/generated/l10n.dart';
+
+class CountryLocationSelector extends StatefulWidget {
+  const CountryLocationSelector({super.key});
+
+  @override
+  State<CountryLocationSelector> createState() =>
+      _CountryLocationSelectorState();
+}
+
+class _CountryLocationSelectorState extends State<CountryLocationSelector> {
+  late final PaginatedDropdownCubit<CountryModel> _countryCubit;
+  late final PaginatedDropdownCubit<LocationModel> _locationCubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _countryCubit = PaginatedDropdownCubit<CountryModel>(
+      fetchData: sl<SignupRepo>().fetchCountries,
+    );
+    _locationCubit = PaginatedDropdownCubit<LocationModel>(
+      fetchData: sl<SignupRepo>().fetchLocations,
+    );
+  }
+
+  @override
+  void dispose() {
+    _countryCubit.close();
+    _locationCubit.close();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      spacing: AppSize.s16,
+      children: [
+        Expanded(
+          child: PaginatedSearchDropdown<CountryModel>(
+            title: S.of(context).selectCountry,
+            cubit: _countryCubit,
+            itemAsString: (country) => country.country,
+            itemBuilder: (context, item, isSelected) {
+              return ListTile(
+                leading: Text(countryCodeToFlag(item.abbreviation)),
+                title: Text(item.country),
+                trailing: isSelected ? const Icon(Icons.check) : null,
+              );
+            },
+            onSelecte: (country) {
+              context.read<SignupCubit>().selectCountry(country);
+            },
+          ),
+        ),
+        Expanded(
+          child: PaginatedSearchDropdown<LocationModel>(
+            title: S.of(context).selectCountry,
+            cubit: _locationCubit,
+            itemAsString: (location) => location.name,
+            onSelecte: (location) {
+              context.read<SignupCubit>().selectLocation(location);
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}

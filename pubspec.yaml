@@ -32,7 +32,6 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   get_it: ^9.2.0
-  high_q_paginated_drop_down: ^2.1.6
 
 dev_dependencies:
   flutter_test:

@@ -28,17 +28,26 @@ class MessageLookup extends MessageLookupByLibrary {
     "FirstName": MessageLookupByLibrary.simpleMessage("اسمك إيه؟"),
     "LastName": MessageLookupByLibrary.simpleMessage("اسم العيلة"),
     "PhoneNumber": MessageLookupByLibrary.simpleMessage("رقم موبايلك"),
+    "ageRestriction": MessageLookupByLibrary.simpleMessage(
+      "لازم يكون عمرك 18 سنة على الأقل",
+    ),
     "alreadyHaveAccount": MessageLookupByLibrary.simpleMessage("عندك حساب؟"),
     "availableToAddCar": MessageLookupByLibrary.simpleMessage(
-      "حابب تضيف عربية؟",
+      "تحب تضيف عربية؟",
     ),
     "back": MessageLookupByLibrary.simpleMessage("رجوع"),
     "backToLogin": MessageLookupByLibrary.simpleMessage("ارجع للدخول"),
+    "birthDate": MessageLookupByLibrary.simpleMessage("تاريخ ميلادك"),
+    "birthDateRequired": MessageLookupByLibrary.simpleMessage(
+      "اختار تاريخ ميلادك",
+    ),
     "city": MessageLookupByLibrary.simpleMessage("المدينة"),
-    "cityRequired": MessageLookupByLibrary.simpleMessage("إنت في مدينة إيه؟"),
+    "cityRequired": MessageLookupByLibrary.simpleMessage(
+      "قولنا انت في مدينة إيه؟",
+    ),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("أكد الباسورد"),
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
-      "أكد الباسورد يا بطل",
+      "أكد الباسورد",
     ),
     "email": MessageLookupByLibrary.simpleMessage("الإيميل"),
     "emailRequired": MessageLookupByLibrary.simpleMessage(
@@ -50,11 +59,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "forgotPassword": MessageLookupByLibrary.simpleMessage("نسيت الباسورد؟"),
     "get_started": MessageLookupByLibrary.simpleMessage("يلا نبدأ"),
-    "invalidEmail": MessageLookupByLibrary.simpleMessage(
-      "الإيميل ده شكله مش مظبوط",
+    "invalidDateFormat": MessageLookupByLibrary.simpleMessage(
+      "التاريخ ده مش مظبوط",
     ),
+    "invalidEmail": MessageLookupByLibrary.simpleMessage("الإيميل ده مش مظبوط"),
     "invalidPassword": MessageLookupByLibrary.simpleMessage(
-      "حط حرف كبير وصغير ورقم ورمز عشان يبقى جامد",
+      "لازم يكون فيه حرف كبير وصغير ورقم ورمز",
     ),
     "lastNameRequired": MessageLookupByLibrary.simpleMessage(
       "قولنا اسم العيلة",
@@ -63,8 +73,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "login": MessageLookupByLibrary.simpleMessage("ادخل"),
     "loginButton": MessageLookupByLibrary.simpleMessage("ادخل"),
     "loginTitle": MessageLookupByLibrary.simpleMessage(
-      "نورت تاني! جاهز تدوس بنزين؟",
+      "وحشتنا! جاهز تدوس بنزين؟",
     ),
+    "nationalId": MessageLookupByLibrary.simpleMessage("الرقم القومي"),
     "newPassword": MessageLookupByLibrary.simpleMessage("باسورد جديد"),
     "newPasswordRequired": MessageLookupByLibrary.simpleMessage(
       "اكتب باسورد جديد",
@@ -72,7 +83,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "newPasswordStep": MessageLookupByLibrary.simpleMessage("باسورد جديد"),
     "next": MessageLookupByLibrary.simpleMessage("كمّل"),
     "no": MessageLookupByLibrary.simpleMessage("لأ"),
-    "noAccount": MessageLookupByLibrary.simpleMessage("معندكش حساب؟"),
+    "noAccount": MessageLookupByLibrary.simpleMessage("لسه معندكش حساب؟"),
     "noItemFound": MessageLookupByLibrary.simpleMessage("ملقيناش حاجة"),
     "onboarding_four_body": MessageLookupByLibrary.simpleMessage(
       "استلم عربيتك ويلا على مشوارك",
@@ -81,13 +92,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "استلم وانطلق",
     ),
     "onboarding_one_body": MessageLookupByLibrary.simpleMessage(
-      "اختار العربية اللي على مزاجك من غير لف ولا صداع",
+      "اختار العربية اللي على مزاجك من غير أي وجع دماغ",
     ),
     "onboarding_one_title": MessageLookupByLibrary.simpleMessage(
       "أجّر عربيتك في دقايق",
     ),
     "onboarding_three_body": MessageLookupByLibrary.simpleMessage(
-      "كذا طريقة دفع آمنة عشان تبقى رايق",
+      "طرق دفع آمنة عشان تجربتك تبقى هادية",
     ),
     "onboarding_three_title": MessageLookupByLibrary.simpleMessage(
       "ادفع وانت مطمّن",
@@ -101,14 +112,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "otpStep": MessageLookupByLibrary.simpleMessage("الكود"),
     "password": MessageLookupByLibrary.simpleMessage("الباسورد"),
     "passwordDoNotMatch": MessageLookupByLibrary.simpleMessage(
-      "الباسوردين مش زي بعض",
+      "الباسوردين مش شبه بعض",
     ),
     "passwordRequired": MessageLookupByLibrary.simpleMessage("اكتب الباسورد"),
     "passwordTooShort": MessageLookupByLibrary.simpleMessage(
-      "الباسورد لازم 8 حروف على الأقل",
+      "الباسورد لازم يكون 8 حروف على الأقل",
     ),
     "phoneNumberRequired": MessageLookupByLibrary.simpleMessage(
-      "اكتب رقم موبايلك",
+      "اكتب رقم الموبايل",
     ),
     "phoneVerificationBody": MessageLookupByLibrary.simpleMessage(
       "اكتب الكود اللي بعتناه على موبايلك",
@@ -130,12 +141,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "resetPasswordOtpSubtitle": MessageLookupByLibrary.simpleMessage(
       "اكتب الكود اللي بعتناه على إيميلك",
     ),
-    "resetPasswordOtpTitle": MessageLookupByLibrary.simpleMessage("فاضل حبة!"),
+    "resetPasswordOtpTitle": MessageLookupByLibrary.simpleMessage("فاضل خطوة!"),
     "resetPasswordRequestBody": MessageLookupByLibrary.simpleMessage(
-      "اكتب إيميلك وإحنا هنظبطلك الموضوع",
+      "اكتب إيميلك وإحنا هنمشي معاك خطوة بخطوة",
     ),
     "resetPasswordRequestTitle": MessageLookupByLibrary.simpleMessage(
-      "نرجّع الباسورد تاني",
+      "يلا نرجّع الباسورد",
     ),
     "retry": MessageLookupByLibrary.simpleMessage("جرب تاني"),
     "search": MessageLookupByLibrary.simpleMessage("دور..."),

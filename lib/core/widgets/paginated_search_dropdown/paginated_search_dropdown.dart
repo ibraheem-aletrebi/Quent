@@ -11,7 +11,7 @@ class PaginatedSearchDropdown<T> extends StatelessWidget {
     required this.itemAsString,
     this.itemBuilder,
     this.onSelecte,
-    required this.title
+    required this.title,
   });
   final String title;
   final PaginatedDropdownCubit<T> cubit;
@@ -32,6 +32,9 @@ class PaginatedSearchDropdown<T> extends StatelessWidget {
               state.selectedItem != null
                   ? itemAsString(state.selectedItem as T)
                   : title,
+              style: state.selectedItem != null
+                  ? Theme.of(context).textTheme.titleMedium
+                  : Theme.of(context).textTheme.bodySmall,
             ),
           ),
         );

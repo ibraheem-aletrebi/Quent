@@ -28,6 +28,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "FirstName": MessageLookupByLibrary.simpleMessage("First Name"),
     "LastName": MessageLookupByLibrary.simpleMessage("Last Name"),
     "PhoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
+    "ageRestriction": MessageLookupByLibrary.simpleMessage(
+      "You must be at least 18 years old",
+    ),
     "alreadyHaveAccount": MessageLookupByLibrary.simpleMessage(
       "Already have an account?",
     ),
@@ -36,6 +39,10 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "back": MessageLookupByLibrary.simpleMessage("Back"),
     "backToLogin": MessageLookupByLibrary.simpleMessage("Back to Login"),
+    "birthDate": MessageLookupByLibrary.simpleMessage("Birth Date"),
+    "birthDateRequired": MessageLookupByLibrary.simpleMessage(
+      "Please enter your birth date",
+    ),
     "city": MessageLookupByLibrary.simpleMessage("City"),
     "cityRequired": MessageLookupByLibrary.simpleMessage(
       "Please enter your city",
@@ -54,6 +61,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "forgotPassword": MessageLookupByLibrary.simpleMessage("Forgot Password?"),
     "get_started": MessageLookupByLibrary.simpleMessage("Let’s Get Started"),
+    "invalidDateFormat": MessageLookupByLibrary.simpleMessage(
+      "Invalid date format",
+    ),
     "invalidEmail": MessageLookupByLibrary.simpleMessage(
       "Please enter a valid email",
     ),
@@ -69,6 +79,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "loginTitle": MessageLookupByLibrary.simpleMessage(
       "Welcome Back Ready to hit the road.",
     ),
+    "nationalId": MessageLookupByLibrary.simpleMessage("National ID"),
     "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
     "newPasswordRequired": MessageLookupByLibrary.simpleMessage(
       "Please enter a new password",

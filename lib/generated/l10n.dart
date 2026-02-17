@@ -658,6 +658,46 @@ class S {
       args: [],
     );
   }
+
+  /// `National ID`
+  String get nationalId {
+    return Intl.message('National ID', name: 'nationalId', desc: '', args: []);
+  }
+
+  /// `Birth Date`
+  String get birthDate {
+    return Intl.message('Birth Date', name: 'birthDate', desc: '', args: []);
+  }
+
+  /// `Please enter your birth date`
+  String get birthDateRequired {
+    return Intl.message(
+      'Please enter your birth date',
+      name: 'birthDateRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid date format`
+  String get invalidDateFormat {
+    return Intl.message(
+      'Invalid date format',
+      name: 'invalidDateFormat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You must be at least 18 years old`
+  String get ageRestriction {
+    return Intl.message(
+      'You must be at least 18 years old',
+      name: 'ageRestriction',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

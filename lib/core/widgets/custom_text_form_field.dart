@@ -57,9 +57,10 @@ class CustomTextFormField extends StatefulWidget {
   final Widget? customErrorIcon;
   final String? successMessage;
   final String? errorMessage;
-
+  final void Function()? onTap;
   const CustomTextFormField({
     super.key,
+    this.onTap,
     this.controller,
     this.labelText,
     this.hintText,
@@ -556,6 +557,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           ),
 
         TextFormField(
+          onTap: widget.onTap,
           controller: _controller,
           focusNode: _focusNode,
           keyboardType: widget.keyboardType,

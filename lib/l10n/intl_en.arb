@@ -72,5 +72,10 @@
   "selectDate": "Select Date",
   "selectTime": "Select Time",
   "selectCar": "Select Car",
-  "selectCarType": "Select Car Type"
+  "selectCarType": "Select Car Type",
+  "nationalId": "National ID",
+  "birthDate": "Birth Date",
+  "birthDateRequired": "Please enter your birth date",
+  "invalidDateFormat": "Invalid date format",
+  "ageRestriction": "You must be at least 18 years old"
 }
