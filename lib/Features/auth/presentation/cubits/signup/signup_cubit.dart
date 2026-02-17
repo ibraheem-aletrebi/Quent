@@ -1,12 +1,15 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:quent/Features/auth/data/repo/signup_repo.dart';
+import 'package:quent/core/models/country_model.dart';
 
 part 'signup_state.dart';
 
 class SignupCubit extends Cubit<SignupState> {
-  SignupCubit() : super(SignupInitial());
+  SignupCubit(this.repo) : super(SignupInitial());
 
+  final SignupRepo repo;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   final TextEditingController firstNameController = TextEditingController();
@@ -19,6 +22,7 @@ class SignupCubit extends Cubit<SignupState> {
   final TextEditingController confirmPasswordController =
       TextEditingController();
   bool addCar = true;
+  late CountryModel selectedCountry ;
 
   void signup() async {
     emit(SignupLoading());
@@ -26,7 +30,7 @@ class SignupCubit extends Cubit<SignupState> {
       emit(SignupSuccess());
     });
   }
-
+  
   void toggleAddCar() {
     addCar = !addCar;
     emit(SignupToggleCar(addCar: addCar));

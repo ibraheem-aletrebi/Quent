@@ -79,6 +79,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "noAccount": MessageLookupByLibrary.simpleMessage(
       "Don\'t have an account?",
     ),
+    "noItemFound": MessageLookupByLibrary.simpleMessage("No item found"),
     "onboarding_four_body": MessageLookupByLibrary.simpleMessage(
       "Pick up your car and enjoy the ride",
     ),
@@ -148,6 +149,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "resetPasswordRequestTitle": MessageLookupByLibrary.simpleMessage(
       "Let’s reset your password",
     ),
+    "retry": MessageLookupByLibrary.simpleMessage("Retry"),
+    "search": MessageLookupByLibrary.simpleMessage("Search..."),
+    "selectCar": MessageLookupByLibrary.simpleMessage("Select Car"),
+    "selectCarType": MessageLookupByLibrary.simpleMessage("Select Car Type"),
+    "selectCity": MessageLookupByLibrary.simpleMessage("Select City"),
+    "selectCountry": MessageLookupByLibrary.simpleMessage("Select Country"),
+    "selectDate": MessageLookupByLibrary.simpleMessage("Select Date"),
+    "selectLocation": MessageLookupByLibrary.simpleMessage("Select Location"),
+    "selectTime": MessageLookupByLibrary.simpleMessage("Select Time"),
     "signup": MessageLookupByLibrary.simpleMessage("SignUp"),
     "signupButton": MessageLookupByLibrary.simpleMessage("SignUp"),
     "signupTitle": MessageLookupByLibrary.simpleMessage(

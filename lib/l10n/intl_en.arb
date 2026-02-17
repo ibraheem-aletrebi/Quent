@@ -55,14 +55,22 @@
   "newPassword": "New Password",
   "confirmPassword": "Confirm Password",
   "newPasswordRequired": "Please enter a new password",
-   "emailStep": "Email",
+  "emailStep": "Email",
   "otpStep": "OTP",
   "newPasswordStep": "New Password",
   "back": "Back",
-
-
-  "phoneVerificationtitle":"Phone Verification",
-  "phoneVerificationBody":"Enter the code we sent to your phone number to verify your account.",
-  "phoneVerificationResend":"Resend Code",
-  "skipForNow":"Skip for now"
+  "phoneVerificationtitle": "Phone Verification",
+  "phoneVerificationBody": "Enter the code we sent to your phone number to verify your account.",
+  "phoneVerificationResend": "Resend Code",
+  "skipForNow": "Skip for now",
+  "retry": "Retry",
+  "noItemFound": "No item found",
+  "search": "Search...",
+  "selectLocation": "Select Location",
+  "selectCountry": "Select Country",
+  "selectCity": "Select City",
+  "selectDate": "Select Date",
+  "selectTime": "Select Time",
+  "selectCar": "Select Car",
+  "selectCarType": "Select Car Type"
 }

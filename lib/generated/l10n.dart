@@ -588,6 +588,76 @@ class S {
   String get skipForNow {
     return Intl.message('Skip for now', name: 'skipForNow', desc: '', args: []);
   }
+
+  /// `Retry`
+  String get retry {
+    return Intl.message('Retry', name: 'retry', desc: '', args: []);
+  }
+
+  /// `No item found`
+  String get noItemFound {
+    return Intl.message(
+      'No item found',
+      name: 'noItemFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search...`
+  String get search {
+    return Intl.message('Search...', name: 'search', desc: '', args: []);
+  }
+
+  /// `Select Location`
+  String get selectLocation {
+    return Intl.message(
+      'Select Location',
+      name: 'selectLocation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Country`
+  String get selectCountry {
+    return Intl.message(
+      'Select Country',
+      name: 'selectCountry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select City`
+  String get selectCity {
+    return Intl.message('Select City', name: 'selectCity', desc: '', args: []);
+  }
+
+  /// `Select Date`
+  String get selectDate {
+    return Intl.message('Select Date', name: 'selectDate', desc: '', args: []);
+  }
+
+  /// `Select Time`
+  String get selectTime {
+    return Intl.message('Select Time', name: 'selectTime', desc: '', args: []);
+  }
+
+  /// `Select Car`
+  String get selectCar {
+    return Intl.message('Select Car', name: 'selectCar', desc: '', args: []);
+  }
+
+  /// `Select Car Type`
+  String get selectCarType {
+    return Intl.message(
+      'Select Car Type',
+      name: 'selectCarType',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

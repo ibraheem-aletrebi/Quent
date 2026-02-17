@@ -122,7 +122,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
   ValidationState _validationState = ValidationState.none;
   BorderState _borderState = BorderState.normal;
-  final bool _isHovering = false;
   bool _isValidating = false;
   Timer? _validationTimer;
   String? _validationError;
@@ -372,6 +371,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     Color color;
 
     switch (_borderState) {
+      case BorderState.normal:
+        color = isDarkMode
+            ? AppColors.surfaceDarkColor
+            : AppColors.surfaceLightColor;
+        break;
       case BorderState.disabled:
         color = theme.disabledColor.withValues(alpha: .4);
         break;
@@ -384,19 +388,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       case BorderState.success:
         color = AppColors.successColor;
         break;
-      case BorderState.normal:
-        color = isDarkMode
-            ? AppColors.surfaceDarkColor
-            : AppColors.surfaceLightColor;
-        break;
-    }
-
-    if (_isHovering && widget.enabled) {
-      color = Color.lerp(
-        color,
-        widget.hoverColor ?? widget.focusColor ?? theme.primaryColor,
-        0.3,
-      )!;
     }
 
     return color;
@@ -614,7 +605,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             contentPadding:
                 widget.contentPadding ??
                 const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-            enabledBorder: _buildBorder(context),
+            enabledBorder: null,
             focusedBorder: _buildBorder(context),
             errorBorder: _buildErrorBorder(context),
             focusedErrorBorder: _buildErrorBorder(context),

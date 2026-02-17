@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:quent/core/resources/app_border.dart';
 import 'package:quent/core/resources/app_color.dart';
-import 'package:quent/core/resources/app_padding.dart';
 import 'package:quent/core/resources/font_family_helper.dart';
 import 'package:quent/core/resources/text_styles.dart';
 
@@ -11,14 +10,11 @@ ThemeData buildLightTheme(Locale locale) {
     fontFamily: FontFamilyHelper.fromLocale(locale),
     primaryColor: AppColors.primaryColor,
     scaffoldBackgroundColor: AppColors.backgroundLightColor,
-    disabledColor: AppColors.surfaceLightColor,
-    dividerColor: AppColors.dividerLightColor,
 
     colorScheme: ColorScheme.light(
       primary: AppColors.primaryColor,
       error: AppColors.errorColor,
-      surface: AppColors.surfaceLightColor,
-      outline: AppColors.surfaceLightColor,
+
       brightness: Brightness.dark,
     ),
 
@@ -108,10 +104,7 @@ ThemeData buildLightTheme(Locale locale) {
         ),
       ),
       isDense: true,
-      contentPadding: EdgeInsets.symmetric(
-        vertical: AppPadding.p20,
-        horizontal: AppPadding.p24,
-      ),
+      contentPadding: EdgeInsets.all(16),
       filled: true,
       fillColor: AppColors.surfaceLightColor,
     ),
@@ -142,14 +135,11 @@ ThemeData buildDarkTheme(Locale locale) {
     brightness: Brightness.dark,
     primaryColor: AppColors.primaryColor,
     scaffoldBackgroundColor: AppColors.backgroundDarkColor,
-    disabledColor: AppColors.surfaceDarkColor,
-    dividerColor: AppColors.dividerDarkColor,
 
     colorScheme: ColorScheme.dark(
       primary: AppColors.primaryColor,
       error: AppColors.errorColor,
-      surface: AppColors.surfaceDarkColor,
-      outline: AppColors.surfaceDarkColor,
+
       brightness: Brightness.dark,
     ),
 
@@ -237,10 +227,7 @@ ThemeData buildDarkTheme(Locale locale) {
         borderSide: BorderSide(color: AppColors.surfaceDarkColor, width: 1),
       ),
       isDense: true,
-      contentPadding: EdgeInsets.symmetric(
-        vertical: AppPadding.p20,
-        horizontal: AppPadding.p24,
-      ),
+      contentPadding: EdgeInsets.all(16),
       filled: true,
       fillColor: AppColors.surfaceDarkColor,
     ),

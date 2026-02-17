@@ -1,29 +1,43 @@
-
-
 import 'package:quent/core/services/network/api_error_handler.dart';
 import 'package:quent/core/services/network/api_error_model.dart';
 
-class ApiResult<T> {
-  ApiResult._();
+abstract class ApiResult<T> {
+  const ApiResult();
+
+  R when<R>({
+    required R Function(T data) onSuccess,
+    required R Function(ApiErrorModel error) onError,
+  });
+
   factory ApiResult.success(T data) = ApiSuccess<T>;
-  factory ApiResult.error(Object e) = ApiError<T>;
-  dynamic when(
-      {required Function(T data) onSuccess,
-      required Function(ApiErrorModel error) onError}) {
-    if (this is ApiSuccess<T>) {
-      return onSuccess((this as ApiSuccess<T>).data);
-    } else {
-      return onError(ApiErrorHandler().handle((this as ApiError).error));
-    }
-  }
+  factory ApiResult.error(Object error) = ApiError<T>;
 }
 
 class ApiSuccess<T> extends ApiResult<T> {
   final T data;
-  ApiSuccess(this.data) : super._();
+
+  const ApiSuccess(this.data);
+
+  @override
+  R when<R>({
+    required R Function(T data) onSuccess,
+    required R Function(ApiErrorModel error) onError,
+  }) {
+    return onSuccess(data);
+  }
 }
 
 class ApiError<T> extends ApiResult<T> {
   final Object error;
-  ApiError(this.error) : super._();
+
+  const ApiError(this.error);
+
+  @override
+  R when<R>({
+    required R Function(T data) onSuccess,
+    required R Function(ApiErrorModel error) onError,
+  }) {
+    final handledError = ApiErrorHandler().handle(error);
+    return onError(handledError);
+  }
 }

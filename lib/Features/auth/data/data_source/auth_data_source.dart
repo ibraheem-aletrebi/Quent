@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:quent/Features/auth/data/models/country_response_model.dart';
 import 'package:quent/Features/auth/data/models/login_request_model.dart';
 import 'package:quent/Features/auth/data/models/login_response_model.dart';
 import 'package:quent/core/constants/api_end_points.dart';
@@ -20,7 +21,20 @@ class AuthDataSource {
   }
 
   Future<void> logout() async {
-      await apiService.post(ApiEndPoints.logout);
+    await apiService.post(ApiEndPoints.logout);
   }
 
+  Future<CountryResponseModel> fetchCountries({
+    int page = 1,
+    String? search,
+  }) async {
+    final Response response = await apiService.get(
+      ApiEndPoints.countries,
+      queryParameters: {'page': page, 'search': search},
+    );
+    return CountryResponseModel.fromJson(response.data);
+  }
+
+  
+  
 }
