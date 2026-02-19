@@ -27,7 +27,10 @@ class RouteConfigration {
       case AppRoutes.forgotPassword:
         return MaterialPageRoute(builder: (_) => const ForgotPasswordView());
       case AppRoutes.phoneVerification:
-        return MaterialPageRoute(builder: (_) => const PhoneVerificationView());
+        return MaterialPageRoute(
+          builder: (_) =>
+              PhoneVerificationView(phone: settings.arguments as String),
+        );
 
       case AppRoutes.main:
         return MaterialPageRoute(
@@ -53,7 +56,7 @@ class RouteConfigration {
     if (!isOnboardingShown) {
       return AppRoutes.onboarding;
     }
-    if (rememberMe ) {
+    if (rememberMe) {
       return AppRoutes.main;
     }
     return AppRoutes.login;

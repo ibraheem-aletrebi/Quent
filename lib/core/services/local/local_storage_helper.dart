@@ -8,7 +8,6 @@ class LocalStorageHelper {
   static const String _defaultBoxName = 'app_box';
   late Box _box;
 
-  /// Initialize Hive box
   Future<void> init({String boxName = _defaultBoxName}) async {
     await Hive.initFlutter();
     _box = await Hive.openBox(boxName);

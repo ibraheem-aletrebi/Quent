@@ -7,13 +7,13 @@ sealed class ForgotPasswordFlowState extends Equatable {
   List<Object?> get props => [];
 }
 
-/// -------------------- Initial --------------------
+
 
 final class ForgotPasswordInitial extends ForgotPasswordFlowState {}
 
-/// -------------------- Email Verification --------------------
 
-final class EmailVerificationLoading extends ForgotPasswordFlowState {}
+final class Loading extends ForgotPasswordFlowState {}
+
 
 final class EmailVerificationSuccess extends ForgotPasswordFlowState {
   final String email;
@@ -33,12 +33,12 @@ final class EmailVerificationError extends ForgotPasswordFlowState {
   List<Object?> get props => [message];
 }
 
-/// -------------------- OTP Verification --------------------
+
 
 final class OtpVerificationLoading extends ForgotPasswordFlowState {}
 
 final class OtpVerificationSuccess extends ForgotPasswordFlowState {
-  final String otp; // or otpId / token if needed
+  final String otp; 
 
   const OtpVerificationSuccess(this.otp);
 
@@ -55,12 +55,11 @@ final class OtpVerificationError extends ForgotPasswordFlowState {
   List<Object?> get props => [message];
 }
 
-/// -------------------- Resend OTP --------------------
 
 final class ResendOtpLoading extends ForgotPasswordFlowState {}
 
 final class ResendOtpSuccess extends ForgotPasswordFlowState {
-  final String otp; // or otpId / token
+  final String otp;
 
   const ResendOtpSuccess(this.otp);
 
@@ -77,7 +76,6 @@ final class ResendOtpError extends ForgotPasswordFlowState {
   List<Object?> get props => [message];
 }
 
-/// -------------------- Reset Password --------------------
 
 final class ResetPasswordLoading extends ForgotPasswordFlowState {}
 

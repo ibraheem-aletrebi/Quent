@@ -773,6 +773,31 @@ class S {
       args: [],
     );
   }
+
+  /// `Enter the code that we sent to your phone number to verify your account`
+  String get otpPhoneRequired {
+    return Intl.message(
+      'Enter the code that we sent to your phone number to verify your account',
+      name: 'otpPhoneRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OTP must be 4 digits`
+  String get otpValidation {
+    return Intl.message(
+      'OTP must be 4 digits',
+      name: 'otpValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Copy`
+  String get copy {
+    return Intl.message('Copy', name: 'copy', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

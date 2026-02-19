@@ -23,15 +23,6 @@ final class SignupLoading extends SignupState {
   const SignupLoading();
 }
 
-final class SignupSuccess extends SignupState {
-  final SignupResponseModel signupResponseModel;
-
-  const SignupSuccess({required this.signupResponseModel});
-
-  @override
-  List<Object?> get props => [signupResponseModel];
-}
-
 final class SignupFailure extends SignupState {
   final ApiErrorModel error;
 
@@ -52,4 +43,9 @@ final class SignupToggleCar extends SignupState {
 
 final class SignupValidationFailed extends SignupState {
   const SignupValidationFailed();
+}
+
+final class SignUpSuccessAndPhoneVerifyCodeSent extends SignupState {
+  final VerifyPhoneResponseModel verifyPhoneResponseModel;
+  const SignUpSuccessAndPhoneVerifyCodeSent({required this.verifyPhoneResponseModel});
 }

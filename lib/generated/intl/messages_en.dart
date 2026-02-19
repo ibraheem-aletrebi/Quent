@@ -51,6 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
       "Please enter your confirm password",
     ),
+    "copy": MessageLookupByLibrary.simpleMessage("Copy"),
     "countryRequired": MessageLookupByLibrary.simpleMessage(
       "Please select a country",
     ),
@@ -131,7 +132,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "onboarding_two_title": MessageLookupByLibrary.simpleMessage(
       "Cars near you",
     ),
+    "otpPhoneRequired": MessageLookupByLibrary.simpleMessage(
+      "Enter the code that we sent to your phone number to verify your account",
+    ),
     "otpStep": MessageLookupByLibrary.simpleMessage("OTP"),
+    "otpValidation": MessageLookupByLibrary.simpleMessage(
+      "OTP must be 4 digits",
+    ),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
     "passwordDoNotMatch": MessageLookupByLibrary.simpleMessage(
       "Password do not match",

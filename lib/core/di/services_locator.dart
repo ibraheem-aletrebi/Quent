@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:quent/Features/auth/data/data_source/auth_data_source.dart';
 import 'package:quent/Features/auth/data/repo/login_repo.dart';
 import 'package:quent/Features/auth/data/repo/signup_repo.dart';
+import 'package:quent/Features/auth/presentation/cubits/phone_verify/phone_verify_cubit.dart';
 import 'package:quent/Features/auth/presentation/cubits/login/login_cubit.dart';
 import 'package:quent/Features/auth/presentation/cubits/signup/signup_cubit.dart';
 import 'package:quent/core/services/local/local_storage_helper.dart';
@@ -24,7 +25,8 @@ Future<void> _initCore() async {
 Future<void> _initAuth() async {
   sl
     ..registerFactory(() => LoginCubit(repo: sl()))
-    ..registerFactory(() => SignupCubit(sl()))
+    ..registerFactory(() => SignupCubit(repo: sl()))
+    ..registerFactory(() =>  PhoneVerifyCubit(repo: sl()))
     ..registerLazySingleton(() => LoginRepo(authDataSource: sl()))
     ..registerLazySingleton(() => AuthDataSource(apiService: sl()))
     ..registerLazySingleton(() => SignupRepo(authDataSource: sl()));

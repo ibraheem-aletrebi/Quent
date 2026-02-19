@@ -9,6 +9,8 @@ extension CustomSnackbarExtension on BuildContext {
     Duration duration = const Duration(seconds: 3),
     SnackbarPosition position = SnackbarPosition.top,
     bool showCloseButton = false,
+    VoidCallback? onAction,
+    String? actionLabel,
   }) {
     CustomSnackbar.show(
       this,
@@ -18,6 +20,9 @@ extension CustomSnackbarExtension on BuildContext {
       duration: duration,
       position: position,
       showCloseButton: false,
+      onAction: onAction,
+      actionLabel: actionLabel
+      
     );
   }
 }

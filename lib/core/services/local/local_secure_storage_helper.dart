@@ -6,11 +6,11 @@ class LocalSecureStorageHelper {
   static final LocalSecureStorageHelper _instance =
       LocalSecureStorageHelper._internal();
   factory LocalSecureStorageHelper() => _instance;
-
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
 
   static const String _accessTokenKey = 'ACCESS_TOKEN';
   static const String _refreshTokenKey = 'REFRESH_TOKEN';
+  static const String _verifyTokenKey = 'VERIFY_TOKEN';
 
   Future<void> write({required String key, required String value}) async {
     await _storage.write(key: key, value: value);
@@ -58,6 +58,18 @@ class LocalSecureStorageHelper {
 
   Future<void> deleteAccessToken() async {
     await delete(_accessTokenKey);
+  }
+
+  Future<void> saveVerifyToken(String token) async {
+    await write(key: _verifyTokenKey, value: token);
+  }
+
+  Future<String?> getVerifyToken() async {
+    return await read(_verifyTokenKey);
+  }
+
+  Future<void> deleteVerifyToken() async {
+    await delete(_verifyTokenKey);
   }
 
   Future<bool> hasAccessToken() async {

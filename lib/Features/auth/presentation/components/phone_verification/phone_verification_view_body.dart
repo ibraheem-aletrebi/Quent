@@ -11,42 +11,32 @@ class PhoneVerificationViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(AppPadding.p16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const BackButton(),
-          Expanded(
-            child: SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight:
-                      MediaQuery.of(context).size.height -
-                      MediaQuery.of(context).padding.top -
-                      kToolbarHeight,
-                ),
-                child: IntrinsicHeight(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      AuthTitleBody(
-                        title: S.of(context).phoneVerificationtitle,
-                        body: S.of(context).phoneVerificationBody,
-                      ),
-                      SizedBox(height: AppSize.s32),
-                      PhoneVerificationForm(),
-                      SizedBox(height: AppSize.s32),
-                      PhoneVerificationActions(),
-                    ],
-                  ),
-                ),
+    return SingleChildScrollView(
+          padding: EdgeInsets.all(AppPadding.p16),
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          minHeight:
+              MediaQuery.of(context).size.height -
+              MediaQuery.of(context).padding.top -
+              kToolbarHeight,
+        ),
+        child: IntrinsicHeight(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              AuthTitleBody(
+                title: S.of(context).phoneVerificationtitle,
+                body: S.of(context).phoneVerificationBody,
               ),
-            ),
+              SizedBox(height: AppSize.s32),
+              PhoneVerificationForm(),
+              SizedBox(height: AppSize.s32),
+              PhoneVerificationActions(),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

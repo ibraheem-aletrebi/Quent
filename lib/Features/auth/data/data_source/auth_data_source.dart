@@ -3,8 +3,10 @@ import 'package:quent/Features/auth/data/models/country_response_model.dart';
 import 'package:quent/Features/auth/data/models/location_response_model.dart';
 import 'package:quent/Features/auth/data/models/login_request_model.dart';
 import 'package:quent/Features/auth/data/models/login_response_model.dart';
+import 'package:quent/Features/auth/data/models/phone_verified_response_model.dart';
 import 'package:quent/Features/auth/data/models/signup_request_model.dart';
 import 'package:quent/Features/auth/data/models/signup_response_model.dart';
+import 'package:quent/Features/auth/data/models/verify_phone_response_model.dart';
 import 'package:quent/core/constants/api_end_points.dart';
 import 'package:quent/core/services/network/api_service.dart';
 
@@ -58,5 +60,34 @@ class AuthDataSource {
       options: Options(contentType: Headers.formUrlEncodedContentType),
     );
     return SignupResponseModel.fromJson(response.data);
+  }
+
+  Future<VerifyPhoneResponseModel> verifyPhone({required String phone}) async {
+    final Response response = await apiService.post(
+      ApiEndPoints.verifyPhoneSendCode,
+      data: {'phone': phone},
+    );
+    return VerifyPhoneResponseModel.fromJson(response.data);
+  }
+
+  Future<VerifyPhoneResponseModel> verifyPhoneResendCode({
+    required String phone,
+  }) async {
+    final Response response = await apiService.post(
+      ApiEndPoints.verifyPhoneResendCode,
+      data: {'phone': phone},
+    );
+    return VerifyPhoneResponseModel.fromJson(response.data);
+  }
+
+  Future<PhoneVerifiedResponseModel> verifyPhoneConfirm({
+    required String verifyToken,
+    required String code,
+  }) async {
+    final Response response = await apiService.post(
+      ApiEndPoints.verifyPhoneConfirm,
+      data: {'verify_token': verifyToken, 'code': code},
+    );
+    return PhoneVerifiedResponseModel.fromJson(response.data);
   }
 }

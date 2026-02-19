@@ -11,12 +11,10 @@ class AuthInterceptor extends Interceptor {
 
   @override
   Future<void> onRequest(
-      RequestOptions options,
-      RequestInterceptorHandler handler,
-      ) async {
-
-    final token =
-        await LocalSecureStorageHelper().getAccessToken();
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
+    final token = await LocalSecureStorageHelper().getAccessToken();
 
     if (token != null) {
       options.headers['Authorization'] = 'Bearer $token';
@@ -27,10 +25,9 @@ class AuthInterceptor extends Interceptor {
 
   @override
   Future<void> onError(
-      DioException error,
-      ErrorInterceptorHandler handler,
-      ) async {
-
+    DioException error,
+    ErrorInterceptorHandler handler,
+  ) async {
     if (error.response?.statusCode == 401) {
       return _handle401(error, handler);
     }
@@ -39,10 +36,9 @@ class AuthInterceptor extends Interceptor {
   }
 
   Future<void> _handle401(
-      DioException error,
-      ErrorInterceptorHandler handler,
-      ) async {
-
+    DioException error,
+    ErrorInterceptorHandler handler,
+  ) async {
     final requestOptions = error.requestOptions;
 
     if (_isRefreshing) {
@@ -53,8 +49,7 @@ class AuthInterceptor extends Interceptor {
     _isRefreshing = true;
 
     try {
-      final refreshToken =
-          await LocalSecureStorageHelper().getRefreshToken();
+      final refreshToken = await LocalSecureStorageHelper().getRefreshToken();
 
       if (refreshToken == null) throw Exception('No refresh token');
 
@@ -84,7 +79,6 @@ class AuthInterceptor extends Interceptor {
       }
 
       _queue.clear();
-
     } catch (_) {
       _isRefreshing = false;
       _queue.clear();
@@ -94,8 +88,7 @@ class AuthInterceptor extends Interceptor {
   }
 
   Future<Response> _retry(RequestOptions requestOptions) async {
-    final token =
-        await LocalSecureStorageHelper().getAccessToken();
+    final token = await LocalSecureStorageHelper().getAccessToken();
 
     requestOptions.headers['Authorization'] = 'Bearer $token';
     return dio.fetch(requestOptions);

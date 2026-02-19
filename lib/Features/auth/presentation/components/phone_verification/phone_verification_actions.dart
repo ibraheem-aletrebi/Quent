@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quent/Features/auth/presentation/components/resend_otp_button.dart';
+import 'package:quent/Features/auth/presentation/cubits/phone_verify/phone_verify_cubit.dart';
 import 'package:quent/core/extensions/navigation_extension.dart';
 import 'package:quent/core/resources/app_color.dart';
 import 'package:quent/core/resources/app_size.dart';
@@ -9,25 +11,36 @@ import 'package:quent/generated/l10n.dart';
 
 class PhoneVerificationActions extends StatelessWidget {
   const PhoneVerificationActions({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         ResendOtpButton(
           resendText: S.of(context).phoneVerificationResend,
-          onResend: () {},
+          onResend: () {
+            context.read<PhoneVerifyCubit>().verifyPhoneResendCode();
+          },
         ),
         SizedBox(height: AppSize.s16),
-        CustomButton(text: S.of(context).next, onPressed: () {}),
-        SizedBox(height: AppSize.s16),
         CustomButton(
-          borderColor: AppColors.primaryColor,
-          textColor: AppColors.primaryColor,
-          backgroundColor: AppColors.transparent,
-          text: S.of(context).skipForNow,
+          text: S.of(context).next,
           onPressed: () {
-            context.pushReplacementNamed(AppRoutes.main);
+            context.read<PhoneVerifyCubit>().verifyPhoneConfirm();
+          },
+        ),
+        SizedBox(height: AppSize.s16),
+        BlocBuilder<PhoneVerifyCubit, PhoneVerifyState>(
+          builder: (context, state) {
+            return CustomButton(
+              isLoading: state is PhoneVerifyLoading,
+              borderColor: AppColors.primaryColor,
+              textColor: AppColors.primaryColor,
+              backgroundColor: AppColors.transparent,
+              text: S.of(context).skipForNow,
+              onPressed: () {
+                context.pushReplacementNamed(AppRoutes.main);
+              },
+            );
           },
         ),
       ],

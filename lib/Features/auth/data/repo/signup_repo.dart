@@ -1,8 +1,10 @@
 import 'dart:developer';
 
 import 'package:quent/Features/auth/data/data_source/auth_data_source.dart';
+import 'package:quent/Features/auth/data/models/phone_verified_response_model.dart';
 import 'package:quent/Features/auth/data/models/signup_request_model.dart';
 import 'package:quent/Features/auth/data/models/signup_response_model.dart';
+import 'package:quent/Features/auth/data/models/verify_phone_response_model.dart';
 import 'package:quent/core/models/country_model.dart';
 import 'package:quent/core/models/location_model.dart';
 import 'package:quent/core/services/network/api_result.dart';
@@ -62,6 +64,34 @@ class SignupRepo {
     try {
       return ApiResult.success(
         await authDataSource.signup(signupRequestModel: signupRequestModel),
+      );
+    } catch (e) {
+      log(e.toString());
+      return ApiResult.error(e);
+    }
+  }
+
+
+  Future<ApiResult<VerifyPhoneResponseModel>> verifyPhone({
+    required String phone,
+  }) async {
+    try {
+      return ApiResult.success(
+        await authDataSource.verifyPhone(phone: phone),
+      );
+    } catch (e) {
+      log(e.toString());
+      return ApiResult.error(e);
+    }
+  }
+
+  Future<ApiResult<PhoneVerifiedResponseModel>> verifyPhoneConfirm({
+    required String verifyToken,
+    required String code,
+  }) async {
+    try {
+      return ApiResult.success(
+        await authDataSource.verifyPhoneConfirm(verifyToken: verifyToken, code: code),
       );
     } catch (e) {
       log(e.toString());

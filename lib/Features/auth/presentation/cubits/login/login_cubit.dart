@@ -35,6 +35,7 @@ class LoginCubit extends Cubit<LoginState> {
 
     result.when(
       onSuccess: (data) async {
+        LocalSecureStorageHelper().saveTokens(access: data.tokens.access, refresh: data.tokens.refresh);
         if (rememberMe) {
           await LocalStorageHelper().setValue(HiveKeys.rememberMe, true);
         } else {

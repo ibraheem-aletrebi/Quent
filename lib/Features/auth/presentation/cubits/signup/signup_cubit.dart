@@ -2,22 +2,21 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:quent/Features/auth/data/models/signup_request_model.dart';
-import 'package:quent/Features/auth/data/models/signup_response_model.dart';
+import 'package:quent/Features/auth/data/models/verify_phone_response_model.dart';
 import 'package:quent/Features/auth/data/repo/signup_repo.dart';
 import 'package:quent/core/models/country_model.dart';
 import 'package:quent/core/models/location_model.dart';
+import 'package:quent/core/services/local/local_secure_storage_helper.dart';
 import 'package:quent/core/services/network/api_error_model.dart';
-
 part 'signup_state.dart';
 
 class SignupCubit extends Cubit<SignupState> {
-  SignupCubit(this.repo) : super(SignupInitial());
+  SignupCubit({required this.repo}) : super(SignupInitial());
 
   final SignupRepo repo;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  // Controllers
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -87,7 +86,22 @@ class SignupCubit extends Cubit<SignupState> {
     );
 
     result.when(
-      onSuccess: (data) => emit(SignupSuccess(signupResponseModel: data)),
+      onSuccess: (data) async {
+        LocalSecureStorageHelper().saveTokens(
+          access: data.tokens.access,
+          refresh: data.tokens.refresh,
+        );
+        final verifyResult = await repo.verifyPhone(phone: phoneController.text.trim());
+        verifyResult.when(
+          onSuccess: (data) {
+            LocalSecureStorageHelper().saveVerifyToken(data.verifyToken);
+            emit(SignUpSuccessAndPhoneVerifyCodeSent(verifyPhoneResponseModel: data));
+          },
+          onError: (error) {
+            emit(SignupFailure(error: error));
+          },
+        );
+      },
       onError: (e) => emit(SignupFailure(error: e)),
     );
   }

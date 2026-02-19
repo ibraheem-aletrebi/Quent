@@ -39,7 +39,7 @@ class ForgotPasswordFlowCubit extends Cubit<ForgotPasswordFlowState> {
   /// -------------------- Email Verification --------------------
 
   void verifyEmail() {
-    emit(EmailVerificationLoading());
+    emit(Loading());
     emit(EmailVerificationSuccess(emailController.text));
     _goToNext();
 
@@ -59,7 +59,7 @@ class ForgotPasswordFlowCubit extends Cubit<ForgotPasswordFlowState> {
   /// -------------------- Resend OTP --------------------
 
   void resendOtp() {
-    emit(ResendOtpLoading());
+    emit(Loading());
 
     emit(ResendOtpSuccess(otpController.text));
   }
@@ -67,7 +67,7 @@ class ForgotPasswordFlowCubit extends Cubit<ForgotPasswordFlowState> {
   /// -------------------- Reset Password --------------------
 
   void resetPassword() {
-    emit(ResetPasswordLoading());
+    emit(Loading());
     emit(ResetPasswordSuccess());
   }
 
@@ -76,7 +76,6 @@ class ForgotPasswordFlowCubit extends Cubit<ForgotPasswordFlowState> {
   void resetFlow() {
     currentStep = 0;
     pageController.jumpToPage(0);
-
     emailController.clear();
     otpController.clear();
     passwordController.clear();
