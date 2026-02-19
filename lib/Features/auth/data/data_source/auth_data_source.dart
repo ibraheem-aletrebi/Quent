@@ -3,6 +3,8 @@ import 'package:quent/Features/auth/data/models/country_response_model.dart';
 import 'package:quent/Features/auth/data/models/location_response_model.dart';
 import 'package:quent/Features/auth/data/models/login_request_model.dart';
 import 'package:quent/Features/auth/data/models/login_response_model.dart';
+import 'package:quent/Features/auth/data/models/signup_request_model.dart';
+import 'package:quent/Features/auth/data/models/signup_response_model.dart';
 import 'package:quent/core/constants/api_end_points.dart';
 import 'package:quent/core/services/network/api_service.dart';
 
@@ -36,12 +38,10 @@ class AuthDataSource {
     return CountryResponseModel.fromJson(response.data);
   }
 
-  Future<LocationResponseModel> fetchLocations(
-    {
-      int page = 1,
-      String? search
-    }
-  ) async {
+  Future<LocationResponseModel> fetchLocations({
+    int page = 1,
+    String? search,
+  }) async {
     final Response response = await apiService.get(
       ApiEndPoints.locations,
       queryParameters: {'page': page, 'search': search},
@@ -49,5 +49,14 @@ class AuthDataSource {
     return LocationResponseModel.fromJson(response.data);
   }
 
-  
+  Future<SignupResponseModel> signup({
+    required SignupRequestModel signupRequestModel,
+  }) async {
+    final Response response = await apiService.post(
+      ApiEndPoints.signup,
+      data: signupRequestModel.toJson(),
+      options: Options(contentType: Headers.formUrlEncodedContentType),
+    );
+    return SignupResponseModel.fromJson(response.data);
+  }
 }

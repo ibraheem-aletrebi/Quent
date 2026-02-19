@@ -1,4 +1,8 @@
+import 'dart:developer';
+
 import 'package:quent/Features/auth/data/data_source/auth_data_source.dart';
+import 'package:quent/Features/auth/data/models/signup_request_model.dart';
+import 'package:quent/Features/auth/data/models/signup_response_model.dart';
 import 'package:quent/core/models/country_model.dart';
 import 'package:quent/core/models/location_model.dart';
 import 'package:quent/core/services/network/api_result.dart';
@@ -50,6 +54,18 @@ class SignupRepo {
     } catch (e) {
       return ApiResult.error(e);
     }
-}
+  }
 
+  Future<ApiResult<SignupResponseModel>> signUp({
+    required SignupRequestModel signupRequestModel,
+  }) async {
+    try {
+      return ApiResult.success(
+        await authDataSource.signup(signupRequestModel: signupRequestModel),
+      );
+    } catch (e) {
+      log(e.toString());
+      return ApiResult.error(e);
+    }
+  }
 }

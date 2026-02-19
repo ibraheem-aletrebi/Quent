@@ -7,6 +7,7 @@ import 'package:quent/core/models/country_model.dart';
 import 'package:quent/core/models/location_model.dart';
 import 'package:quent/core/resources/app_size.dart';
 import 'package:quent/core/utils/country_code_to_flag.dart';
+import 'package:quent/core/utils/form_validators.dart';
 import 'package:quent/core/widgets/paginated_search_dropdown/cubit/paginated_dropdown_cubit.dart';
 import 'package:quent/core/widgets/paginated_search_dropdown/paginated_search_dropdown.dart';
 import 'package:quent/generated/l10n.dart';
@@ -43,18 +44,30 @@ class _CountryLocationSelectorState extends State<CountryLocationSelector> {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<SignupCubit>();
     return Row(
       spacing: AppSize.s16,
       children: [
         Expanded(
           child: PaginatedSearchDropdown<CountryModel>(
-            title: S.of(context).selectCountry,
+            controller: cubit.countryController,
+            validator: (value) => FormValidators.requiredField(
+              value,
+              S.of(context).countryRequired,
+            ),
+            hintText: S.of(context).selectCountry,
             cubit: _countryCubit,
             itemAsString: (country) => country.country,
             itemBuilder: (context, item, isSelected) {
               return ListTile(
-                leading: Text(countryCodeToFlag(item.abbreviation)),
-                title: Text(item.country),
+                leading: Text(
+                  countryCodeToFlag(item.abbreviation),
+                  style: TextStyle(fontSize: 30),
+                ),
+                title: Text(
+                  item.country,
+                  style: TextTheme.of(context).titleMedium,
+                ),
                 trailing: isSelected ? const Icon(Icons.check) : null,
               );
             },
@@ -65,7 +78,12 @@ class _CountryLocationSelectorState extends State<CountryLocationSelector> {
         ),
         Expanded(
           child: PaginatedSearchDropdown<LocationModel>(
-            title: S.of(context).selectCountry,
+            controller: cubit.locationController,
+            validator: (value) => FormValidators.requiredField(
+              value,
+              S.of(context).locationRequired,
+            ),
+            hintText: S.of(context).selectLocation,
             cubit: _locationCubit,
             itemAsString: (location) => location.name,
             onSelecte: (location) {

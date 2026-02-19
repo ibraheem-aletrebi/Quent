@@ -6,6 +6,7 @@ import 'package:quent/core/extensions/navigation_extension.dart';
 import 'package:quent/core/extensions/snack_bar_extenstion.dart';
 import 'package:quent/core/routing/app_route.dart';
 import 'package:quent/core/widgets/custom_snack_bar.dart';
+import 'package:quent/generated/l10n.dart';
 
 class LoginViewBodyBlocConsumer extends StatelessWidget {
   const LoginViewBodyBlocConsumer({super.key});
@@ -15,6 +16,7 @@ class LoginViewBodyBlocConsumer extends StatelessWidget {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state is LoginSuccess) {
+          context.showSnackbar(S.of(context).loginSuccess);
           context.pushReplacementNamed(AppRoutes.main);
         }
         if (state is LoginError) {

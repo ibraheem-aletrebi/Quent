@@ -5,14 +5,11 @@ import 'package:quent/generated/l10n.dart';
 class YesNoOption extends StatefulWidget {
   final bool? value;
   final ValueChanged<bool> onChanged;
-
   final String? label;
-
   const YesNoOption({
     super.key,
     required this.value,
     required this.onChanged,
-
     this.label,
   });
 
@@ -21,7 +18,7 @@ class YesNoOption extends StatefulWidget {
 }
 
 class _YesNoOptionState extends State<YesNoOption> {
-  bool? selectedValue;
+  late bool? selectedValue;
 
   @override
   void initState() {
@@ -29,11 +26,11 @@ class _YesNoOptionState extends State<YesNoOption> {
     selectedValue = widget.value;
   }
 
-  void select(bool value) {
+  void select() {
     setState(() {
-      selectedValue = value;
+      selectedValue = !selectedValue!;
     });
-    widget.onChanged(value);
+    widget.onChanged(selectedValue!);
   }
 
   @override
@@ -54,16 +51,16 @@ class _YesNoOptionState extends State<YesNoOption> {
           children: [
             _buildOption(
               text: S.of(context).yes,
-              selected: selectedValue == true,
+              selected: selectedValue! == true,
               color: Colors.green,
-              onTap: () => select(true),
+              onTap: () => select(),
             ),
             const SizedBox(width: 16),
             _buildOption(
               text: S.of(context).no,
-              selected: selectedValue == false,
+              selected: selectedValue! == false,
               color: Colors.red,
-              onTap: () => select(false),
+              onTap: () => select(),
             ),
           ],
         ),

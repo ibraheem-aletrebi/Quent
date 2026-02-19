@@ -1,58 +1,55 @@
 part of 'signup_cubit.dart';
 
 sealed class SignupState extends Equatable {
-  final bool? addCar;
-  final bool isLoading;
-  final String? errorMessage;
-
-  const SignupState({
-    this.addCar = false,
-    this.isLoading = false,
-    this.errorMessage,
-  });
-
-  SignupState copyWith({bool? addCar, bool? isLoading, String? errorMessage}) {
-    return SignupInitial(
-      addCar: addCar ?? this.addCar,
-      isLoading: isLoading ?? this.isLoading,
-      errorMessage: errorMessage,
-    );
-  }
+  const SignupState();
 
   @override
-  List<Object?> get props => [addCar, isLoading, errorMessage];
+  List<Object?> get props => [];
 }
 
 final class SignupInitial extends SignupState {
-  const SignupInitial({
-    super.addCar,
-    super.isLoading,
-    super.errorMessage,
-  });
+  final bool addCar;
+  const SignupInitial({this.addCar = false});
+
+  SignupInitial copyWith({bool? addCar}) {
+    return SignupInitial(addCar: addCar ?? this.addCar);
+  }
+
+  @override
+  List<Object?> get props => [addCar];
 }
 
 final class SignupLoading extends SignupState {
-  const SignupLoading()
-      : super(isLoading: true);
+  const SignupLoading();
 }
 
 final class SignupSuccess extends SignupState {
-  const SignupSuccess();
+  final SignupResponseModel signupResponseModel;
+
+  const SignupSuccess({required this.signupResponseModel});
+
+  @override
+  List<Object?> get props => [signupResponseModel];
 }
 
 final class SignupFailure extends SignupState {
-  const SignupFailure({
-    required String message,
-    required super.addCar,
-  }) : super(
-          errorMessage: message,
-        );
+  final ApiErrorModel error;
+
+  const SignupFailure({required this.error});
+
+  @override
+  List<Object?> get props => [error];
 }
 
 final class SignupToggleCar extends SignupState {
-  const SignupToggleCar({
-    required bool addCar,
-  }) : super(
-          addCar: addCar,
-        );
+  final bool addCar;
+
+  const SignupToggleCar({required this.addCar});
+
+  @override
+  List<Object?> get props => [addCar];
+}
+
+final class SignupValidationFailed extends SignupState {
+  const SignupValidationFailed();
 }

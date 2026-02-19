@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quent/core/cubits/theme_cubit/theme_cubit.dart';
 import 'package:quent/core/resources/app_color.dart';
+import 'package:quent/generated/l10n.dart';
 
 class SearchField extends StatelessWidget {
   const SearchField({
@@ -32,7 +33,7 @@ class SearchField extends StatelessWidget {
               width: 2,
             ),
           ),
-          hintText: 'Search...',
+          hintText: S.of(context).search,
           prefixIcon: const Icon(Icons.search),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
         ),

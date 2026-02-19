@@ -47,7 +47,7 @@ class CustomSnackbar {
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        dismissDirection: DismissDirection.horizontal,
+        dismissDirection: DismissDirection.none,
         content: _SnackbarContent(
           message: message,
           title: title,
@@ -129,14 +129,14 @@ class CustomSnackbar {
     SnackbarPosition position,
     SnackBarBehavior behavior,
   ) {
-    if (behavior == SnackBarBehavior.fixed) {
-      return EdgeInsets.zero;
-    }
-
     final mediaQuery = MediaQuery.of(context);
     final screenHeight = mediaQuery.size.height;
     final topPadding = mediaQuery.padding.top;
     final bottomPadding = mediaQuery.padding.bottom;
+
+    if (behavior == SnackBarBehavior.fixed) {
+      return const EdgeInsets.symmetric(horizontal: 8, vertical: 4);
+    }
 
     switch (position) {
       case SnackbarPosition.top:
@@ -147,9 +147,11 @@ class CustomSnackbar {
           bottom: screenHeight - AppSize.s200,
         );
       case SnackbarPosition.center:
-        return EdgeInsets.symmetric(
-          horizontal: AppPadding.p16,
-          vertical: (screenHeight - AppSize.s100) / 2,
+        return EdgeInsets.only(
+          left: AppPadding.p16,
+          right: AppPadding.p16,
+          top: (screenHeight / 2) - (AppSize.s100 / 2),
+          bottom: (screenHeight / 2) - (AppSize.s100 / 2),
         );
       case SnackbarPosition.bottom:
         return EdgeInsets.only(
@@ -193,7 +195,9 @@ class _SnackbarContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Icon(icon, color: textColor, size: 28),
         const SizedBox(width: 12),
@@ -202,12 +206,12 @@ class _SnackbarContent extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (title != null) ...[
-                Text(title!, style: TextTheme.of(context).titleMedium),
+                Text(title!, style: textTheme.titleMedium),
                 const SizedBox(height: 4),
               ],
               Text(
                 message,
-                style: TextTheme.of(context).titleSmall?.copyWith(
+                style: textTheme.titleSmall?.copyWith(
                   fontWeight: title != null
                       ? FontWeightHelper.regular
                       : FontWeightHelper.medium,

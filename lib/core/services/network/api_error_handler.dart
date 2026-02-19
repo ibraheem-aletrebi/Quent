@@ -82,9 +82,19 @@ class ApiErrorHandler {
 
   ApiErrorModel _handleBadResponse(DioException e) {
     final statusCode = e.response?.statusCode ?? 0;
+    final data = e.response?.data;
 
     switch (statusCode) {
       case 400:
+        if (data != null && data['error'] != null) {
+          return ApiErrorModel(
+            message: data['error']['email'][0],
+            action: 'Please check your input and try again.',
+            icon: Icons.warning_amber_rounded,
+            statusCode: ApiLocalStatusCode.badRequest,
+          );
+        }
+
         return ApiErrorModel(
           message: 'Invalid request.',
           action: 'Please check your input and try again.',

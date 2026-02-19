@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:quent/core/services/network/interceptors/auth_interceptor.dart';
+import 'package:quent/core/services/network/interceptors/logger_interceptor.dart';
 
 class DioClient {
   DioClient._internal();
@@ -25,5 +27,8 @@ class DioClient {
     );
 
     dio.interceptors.add(AuthInterceptor(dio));
+    if (kDebugMode) {
+      dio.interceptors.add(LoggerInterceptor());
+    }
   }
 }

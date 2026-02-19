@@ -6,6 +6,8 @@ class SignupRequestModel {
   final String countryId;
   final String password;
   final String availableToAddCar;
+  final String? nationalId;
+  final String? birthDate;
   SignupRequestModel({
     required this.fullName,
     required this.email,
@@ -14,6 +16,8 @@ class SignupRequestModel {
     required this.locationId,
     required this.countryId,
     required this.availableToAddCar,
+    this.nationalId,
+    this.birthDate,
   });
 
   Map<String, dynamic> toJson() {
@@ -25,6 +29,8 @@ class SignupRequestModel {
       'location_id': locationId,
       'country_id': countryId,
       'available_to_add_car': availableToAddCar,
+      'national_id': nationalId,
+      'birth_date': birthDate,
     };
   }
 }

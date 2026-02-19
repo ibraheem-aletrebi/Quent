@@ -4,10 +4,11 @@ import 'package:quent/core/widgets/custom_snack_bar.dart';
 extension CustomSnackbarExtension on BuildContext {
   void showSnackbar(
     String message, {
-    SnackbarType type = SnackbarType.info,
+    SnackbarType type = SnackbarType.success,
     String? title,
-    Duration duration = const Duration(seconds: 2),
+    Duration duration = const Duration(seconds: 3),
     SnackbarPosition position = SnackbarPosition.top,
+    bool showCloseButton = false,
   }) {
     CustomSnackbar.show(
       this,
@@ -16,6 +17,7 @@ extension CustomSnackbarExtension on BuildContext {
       title: title,
       duration: duration,
       position: position,
+      showCloseButton: false,
     );
   }
 }

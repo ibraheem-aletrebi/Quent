@@ -27,6 +27,7 @@
   "FirstName": "First Name",
   "LastName": "Last Name",
   "PhoneNumber": "Phone Number",
+  "phoneNumberValidation": "phone number must be 11 digits",
   "ConfirmPassword": "Confirm Password",
   "availableToAddCar": "Available to add car",
   "signupButton": "SignUp",
@@ -77,5 +78,12 @@
   "birthDate": "Birth Date",
   "birthDateRequired": "Please enter your birth date",
   "invalidDateFormat": "Invalid date format",
-  "ageRestriction": "You must be at least 18 years old"
+  "ageRestriction": "You must be at least 18 years old",
+  "isRequired": "is required",
+  "nationalIdRequired": "Please enter your national ID",
+  "nationalIdValidation": "National ID must be 14 digits",
+  "countryRequired": "Please select a country",
+  "locationRequired": "Please select a location",
+  "signupSuccess": "Success! Your account has been created",
+  "loginSuccess":"Login successful! Welcome back "
 }

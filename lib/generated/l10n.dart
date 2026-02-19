@@ -289,6 +289,16 @@ class S {
     );
   }
 
+  /// `phone number must be 11 digits`
+  String get phoneNumberValidation {
+    return Intl.message(
+      'phone number must be 11 digits',
+      name: 'phoneNumberValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Confirm Password`
   String get ConfirmPassword {
     return Intl.message(
@@ -694,6 +704,71 @@ class S {
     return Intl.message(
       'You must be at least 18 years old',
       name: 'ageRestriction',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `is required`
+  String get isRequired {
+    return Intl.message('is required', name: 'isRequired', desc: '', args: []);
+  }
+
+  /// `Please enter your national ID`
+  String get nationalIdRequired {
+    return Intl.message(
+      'Please enter your national ID',
+      name: 'nationalIdRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `National ID must be 14 digits`
+  String get nationalIdValidation {
+    return Intl.message(
+      'National ID must be 14 digits',
+      name: 'nationalIdValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select a country`
+  String get countryRequired {
+    return Intl.message(
+      'Please select a country',
+      name: 'countryRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select a location`
+  String get locationRequired {
+    return Intl.message(
+      'Please select a location',
+      name: 'locationRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Success! Your account has been created`
+  String get signupSuccess {
+    return Intl.message(
+      'Success! Your account has been created',
+      name: 'signupSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login successful! Welcome back `
+  String get loginSuccess {
+    return Intl.message(
+      'Login successful! Welcome back ',
+      name: 'loginSuccess',
       desc: '',
       args: [],
     );

@@ -1,9 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:quent/Features/auth/data/models/signup_request_model.dart';
+import 'package:quent/Features/auth/data/models/signup_response_model.dart';
 import 'package:quent/Features/auth/data/repo/signup_repo.dart';
 import 'package:quent/core/models/country_model.dart';
 import 'package:quent/core/models/location_model.dart';
+import 'package:quent/core/services/network/api_error_model.dart';
 
 part 'signup_state.dart';
 
@@ -11,7 +14,10 @@ class SignupCubit extends Cubit<SignupState> {
   SignupCubit(this.repo) : super(SignupInitial());
 
   final SignupRepo repo;
+
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  // Controllers
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -23,10 +29,12 @@ class SignupCubit extends Cubit<SignupState> {
       TextEditingController();
   final TextEditingController birthDateController = TextEditingController();
   final TextEditingController nationalIdController = TextEditingController();
+
   bool addCar = false;
-  late CountryModel selectedCountry;
-  late LocationModel selectedLocation;
+  CountryModel? selectedCountry;
+  LocationModel? selectedLocation;
   String? birthDate;
+
   void selectCountry(CountryModel country) {
     selectedCountry = country;
     countryController.text = country.country;
@@ -39,18 +47,49 @@ class SignupCubit extends Cubit<SignupState> {
 
   void selectBirthDate(String date) {
     birthDate = date;
+    birthDateController.text = date;
+  }
+
+  void setAddCar(bool value) {
+    addCar = value;
+    emit(SignupToggleCar(addCar: addCar));
   }
 
   void signup() async {
-    emit(SignupLoading());
-    await Future.delayed(const Duration(seconds: 4), () {
-      emit(SignupSuccess());
-    });
-  }
+    if (!formKey.currentState!.validate()) {
+      emit(SignupValidationFailed());
+      return;
+    }
 
-  void toggleAddCar() {
-    addCar = !addCar;
-    emit(SignupToggleCar(addCar: addCar));
+    if (selectedCountry == null || selectedLocation == null) {
+      emit(
+        SignupFailure(
+          error: ApiErrorModel(message: 'Please select location and country'),
+        ),
+      );
+      return;
+    }
+
+    emit(SignupLoading());
+    final result = await repo.signUp(
+      signupRequestModel: SignupRequestModel(
+        fullName:
+            '${firstNameController.text.trim()} ${lastNameController.text.trim()}',
+        email: emailController.text.trim(),
+        phone: phoneController.text.trim(),
+        countryId: selectedCountry!.id.toString(),
+        locationId: selectedLocation!.id.toString(),
+        password: passwordController.text.trim(),
+        availableToAddCar: addCar ? '1' : '0',
+        birthDate: birthDate,
+        nationalId: nationalIdController.text.trim(),
+      ),
+    );
+
+    result.when(
+      onSuccess: (data) => emit(SignupSuccess(signupResponseModel: data)),
+      onError: (e) => emit(SignupFailure(error: e)),
+    );
   }
 
   @override
@@ -65,7 +104,6 @@ class SignupCubit extends Cubit<SignupState> {
     confirmPasswordController.dispose();
     birthDateController.dispose();
     nationalIdController.dispose();
-
     return super.close();
   }
 }

@@ -51,6 +51,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
       "Please enter your confirm password",
     ),
+    "countryRequired": MessageLookupByLibrary.simpleMessage(
+      "Please select a country",
+    ),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
     "emailRequired": MessageLookupByLibrary.simpleMessage(
       "Please enter your email",
@@ -70,16 +73,29 @@ class MessageLookup extends MessageLookupByLibrary {
     "invalidPassword": MessageLookupByLibrary.simpleMessage(
       "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
     ),
+    "isRequired": MessageLookupByLibrary.simpleMessage("is required"),
     "lastNameRequired": MessageLookupByLibrary.simpleMessage(
       "Please enter your last name",
     ),
     "location": MessageLookupByLibrary.simpleMessage("Location"),
+    "locationRequired": MessageLookupByLibrary.simpleMessage(
+      "Please select a location",
+    ),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
     "loginButton": MessageLookupByLibrary.simpleMessage("LogIn"),
+    "loginSuccess": MessageLookupByLibrary.simpleMessage(
+      "Login successful! Welcome back ",
+    ),
     "loginTitle": MessageLookupByLibrary.simpleMessage(
       "Welcome Back Ready to hit the road.",
     ),
     "nationalId": MessageLookupByLibrary.simpleMessage("National ID"),
+    "nationalIdRequired": MessageLookupByLibrary.simpleMessage(
+      "Please enter your national ID",
+    ),
+    "nationalIdValidation": MessageLookupByLibrary.simpleMessage(
+      "National ID must be 14 digits",
+    ),
     "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
     "newPasswordRequired": MessageLookupByLibrary.simpleMessage(
       "Please enter a new password",
@@ -129,6 +145,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "phoneNumberRequired": MessageLookupByLibrary.simpleMessage(
       "Please enter your phone number",
     ),
+    "phoneNumberValidation": MessageLookupByLibrary.simpleMessage(
+      "phone number must be 11 digits",
+    ),
     "phoneVerificationBody": MessageLookupByLibrary.simpleMessage(
       "Enter the code we sent to your phone number to verify your account.",
     ),
@@ -171,6 +190,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "selectTime": MessageLookupByLibrary.simpleMessage("Select Time"),
     "signup": MessageLookupByLibrary.simpleMessage("SignUp"),
     "signupButton": MessageLookupByLibrary.simpleMessage("SignUp"),
+    "signupSuccess": MessageLookupByLibrary.simpleMessage(
+      "Success! Your account has been created",
+    ),
     "signupTitle": MessageLookupByLibrary.simpleMessage(
       "Join us and start your journey today.",
     ),
