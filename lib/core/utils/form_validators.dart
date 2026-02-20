@@ -20,13 +20,10 @@ class FormValidators {
   static String? password(
     String? value,
     String emptyMessage,
-    String tooShortMessage,
     String invalidMessage, {
     int minLength = 8,
   }) {
     if (value == null || value.isEmpty) return emptyMessage;
-    if (value.length < minLength) return tooShortMessage;
-
     final pattern = RegExp(
       r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$',
     );

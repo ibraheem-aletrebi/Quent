@@ -84,12 +84,11 @@ class ForgotPasswordFlowCubit extends Cubit<ForgotPasswordFlowState> {
   }
 
   void resendOtp() async {
-    emit(Loading());
     otpController.clear();
+    await Future.delayed(const Duration(seconds: 30));
     final result = await repo.forgotPasswordRequest(
       email: emailController.text.trim(),
     );
-
     result.when(
       onSuccess: (data) {
         otpController.text = data.code;

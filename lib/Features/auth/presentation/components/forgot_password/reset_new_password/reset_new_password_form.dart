@@ -25,7 +25,6 @@ class ResetNewPasswordForm extends StatelessWidget {
               value,
               S.of(context).passwordRequired,
               S.of(context).passwordTooShort,
-              S.of(context).invalidPassword,
             ),
           ),
           SizedBox(height: AppSize.s16),

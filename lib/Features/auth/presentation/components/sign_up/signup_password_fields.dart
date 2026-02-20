@@ -23,7 +23,6 @@ class SignupPasswordFields extends StatelessWidget {
             validator: (value) => FormValidators.password(
               value,
               S.of(context).passwordRequired,
-              S.of(context).passwordTooShort,
               S.of(context).invalidPassword,
             ),
           ),
