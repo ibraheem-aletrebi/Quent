@@ -16,14 +16,21 @@ class PhoneVerifyCubit extends Cubit<PhoneVerifyState> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController otpController = TextEditingController();
 
-  void setPhone(String phone) {
+  void init({required String phone, required String code}) {
+    otpController.text = code;
     this.phone = phone;
   }
+
   Future<void> verifyPhoneResendCode() async {
+    otpController.clear();
+    await Future.delayed(const Duration(seconds: 30));
     final result = await repo.verifyPhone(phone: phone!);
     result.when(
       onSuccess: (data) {
-        LocalSecureStorageHelper().write(key:SecureStorageKeys.verifyToken,value:data.verifyToken);
+        LocalSecureStorageHelper().write(
+          key: SecureStorageKeys.verifyToken,
+          value: data.verifyToken,
+        );
         emit(PhoneVerifyResendCode(verifyPhoneResponseModel: data));
       },
       onError: (error) {
@@ -33,9 +40,15 @@ class PhoneVerifyCubit extends Cubit<PhoneVerifyState> {
   }
 
   Future<void> verifyPhoneConfirm() async {
-    final verifyToken = await LocalSecureStorageHelper().read(SecureStorageKeys.verifyToken);
-    if(formKey.currentState!.validate() == false) return;
-    final result = await repo.verifyPhoneConfirm(verifyToken: verifyToken!, code: otpController.text.trim());
+    emit(PhoneVerifyLoading());
+    final verifyToken = await LocalSecureStorageHelper().read(
+      SecureStorageKeys.verifyToken,
+    );
+    if (formKey.currentState!.validate() == false) return;
+    final result = await repo.verifyPhoneConfirm(
+      verifyToken: verifyToken!,
+      code: otpController.text.trim(),
+    );
     result.when(
       onSuccess: (data) {
         emit(PhoneVerifyCodeVerified(phoneVerifiedResponseModel: data));
@@ -44,5 +57,11 @@ class PhoneVerifyCubit extends Cubit<PhoneVerifyState> {
         emit(PhoneVerifyError(errorModel: error));
       },
     );
+  }
+
+  @override
+  Future<void> close() {
+    otpController.dispose();
+    return super.close();
   }
 }

@@ -17,7 +17,11 @@ class SignupViewBodyBlocListener extends StatelessWidget {
         if (state is SignUpSuccessAndPhoneVerifyCodeSent) {
           context.pushReplacementNamed(
             AppRoutes.phoneVerification,
-            arguments: context.read<SignupCubit>().phoneController.text,
+            arguments:{
+              'phone': context.read<SignupCubit>().phoneController.text.trim(),
+              'code': state.verifyPhoneResponseModel.code
+            } ,
+
           );
           context.showSnackbar(
             state.verifyPhoneResponseModel.code,

@@ -20,6 +20,7 @@ class PhoneVerificationViewBodyBlocListener extends StatelessWidget {
           context.showSnackbar(
             state.phoneVerifiedResponseModel.message,
             type: SnackbarType.success,
+            
           );
           context.pushReplacementNamed(AppRoutes.main);
         }

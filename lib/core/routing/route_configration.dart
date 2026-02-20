@@ -28,8 +28,13 @@ class RouteConfigration {
         return MaterialPageRoute(builder: (_) => const ForgotPasswordView());
       case AppRoutes.phoneVerification:
         return MaterialPageRoute(
-          builder: (_) =>
-              PhoneVerificationView(phone: settings.arguments as String),
+          builder: (_) {
+            final Map<String, String> args =
+                settings.arguments! as Map<String, String>;
+            final phone = args['phone']!;
+            final code = args['code']!;
+            return PhoneVerificationView(phone: phone, code: code);
+          },
         );
 
       case AppRoutes.main:

@@ -22,25 +22,25 @@ class PhoneVerificationActions extends StatelessWidget {
           },
         ),
         SizedBox(height: AppSize.s16),
-        CustomButton(
-          text: S.of(context).next,
-          onPressed: () {
-            context.read<PhoneVerifyCubit>().verifyPhoneConfirm();
-          },
-        ),
-        SizedBox(height: AppSize.s16),
         BlocBuilder<PhoneVerifyCubit, PhoneVerifyState>(
           builder: (context, state) {
             return CustomButton(
               isLoading: state is PhoneVerifyLoading,
-              borderColor: AppColors.primaryColor,
-              textColor: AppColors.primaryColor,
-              backgroundColor: AppColors.transparent,
-              text: S.of(context).skipForNow,
+              text: S.of(context).next,
               onPressed: () {
-                context.pushReplacementNamed(AppRoutes.main);
+                context.read<PhoneVerifyCubit>().verifyPhoneConfirm();
               },
             );
+          },
+        ),
+        SizedBox(height: AppSize.s16),
+        CustomButton(
+          borderColor: AppColors.primaryColor,
+          textColor: AppColors.primaryColor,
+          backgroundColor: AppColors.transparent,
+          text: S.of(context).skipForNow,
+          onPressed: () {
+            context.pushReplacementNamed(AppRoutes.main);
           },
         ),
       ],
