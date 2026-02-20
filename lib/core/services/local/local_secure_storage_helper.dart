@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LocalSecureStorageHelper {
@@ -6,40 +5,19 @@ class LocalSecureStorageHelper {
   static final LocalSecureStorageHelper _instance =
       LocalSecureStorageHelper._internal();
   factory LocalSecureStorageHelper() => _instance;
-  final FlutterSecureStorage _storage = const FlutterSecureStorage();
 
-  static const String _accessTokenKey = 'ACCESS_TOKEN';
-  static const String _refreshTokenKey = 'REFRESH_TOKEN';
-  static const String _verifyTokenKey = 'VERIFY_TOKEN';
+  final FlutterSecureStorage _storage = const FlutterSecureStorage();
 
   Future<void> write({required String key, required String value}) async {
     await _storage.write(key: key, value: value);
-  }
-
-
-  Future<void> writeJson({
-    required String key,
-    required Map<String, dynamic> value,
-  }) async {
-    await _storage.write(key: key, value: jsonEncode(value));
   }
 
   Future<String?> read(String key) async {
     return await _storage.read(key: key);
   }
 
-  Future<Map<String, dynamic>?> readJson(String key) async {
-    final data = await _storage.read(key: key);
-    if (data == null) return null;
-    return jsonDecode(data);
-  }
-
   Future<void> delete(String key) async {
     await _storage.delete(key: key);
-  }
-
-  Future<void> deleteAll() async {
-    await _storage.deleteAll();
   }
 
   Future<bool> contains(String key) async {
@@ -47,60 +25,47 @@ class LocalSecureStorageHelper {
     return value != null;
   }
 
-  
-  Future<void> saveAccessToken(String token) async {
-    await write(key: _accessTokenKey, value: token);
-  }
+  Future<void> saveAccessToken(String token) async =>
+      write(key: SecureStorageKeys.accessToken, value: token);
 
-  Future<String?> getAccessToken() async {
-    return await read(_accessTokenKey);
-  }
+  Future<String?> getAccessToken() async => read(SecureStorageKeys.accessToken);
 
-  Future<void> deleteAccessToken() async {
-    await delete(_accessTokenKey);
-  }
+  Future<void> deleteAccessToken() async =>
+      delete(SecureStorageKeys.accessToken);
 
-  Future<void> saveVerifyToken(String token) async {
-    await write(key: _verifyTokenKey, value: token);
-  }
+  Future<bool> hasAccessToken() async =>
+      contains(SecureStorageKeys.accessToken);
 
-  Future<String?> getVerifyToken() async {
-    return await read(_verifyTokenKey);
-  }
+  Future<void> saveRefreshToken(String token) async =>
+      write(key: SecureStorageKeys.refreshToken, value: token);
 
-  Future<void> deleteVerifyToken() async {
-    await delete(_verifyTokenKey);
-  }
+  Future<String?> getRefreshToken() async =>
+      read(SecureStorageKeys.refreshToken);
 
-  Future<bool> hasAccessToken() async {
-    return await contains(_accessTokenKey);
-  }
+  Future<void> deleteRefreshToken() async =>
+      delete(SecureStorageKeys.refreshToken);
 
+  Future<bool> hasRefreshToken() async =>
+      contains(SecureStorageKeys.refreshToken);
 
-  Future<void> saveRefreshToken(String token) async {
-    await write(key: _refreshTokenKey, value: token);
-  }
-
-  Future<String?> getRefreshToken() async {
-    return await read(_refreshTokenKey);
-  }
-
-  Future<void> deleteRefreshToken() async {
-    await delete(_refreshTokenKey);
-  }
-
-  Future<bool> hasRefreshToken() async {
-    return await contains(_refreshTokenKey);
-  }
-
-
-  Future<void> saveTokens({required String access, required String refresh}) async {
+  Future<void> saveTokens({
+    required String access,
+    required String refresh,
+  }) async {
     await saveAccessToken(access);
     await saveRefreshToken(refresh);
   }
-
   Future<void> deleteTokens() async {
     await deleteAccessToken();
     await deleteRefreshToken();
   }
+}
+
+class SecureStorageKeys {
+  SecureStorageKeys._();
+
+  static const accessToken = 'ACCESS_TOKEN';
+  static const refreshToken = 'REFRESH_TOKEN';
+  static const verifyToken = 'VERIFY_TOKEN';
+  static const resetToken = 'RESET_TOKEN';
 }

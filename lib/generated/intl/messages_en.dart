@@ -132,6 +132,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "onboarding_two_title": MessageLookupByLibrary.simpleMessage(
       "Cars near you",
     ),
+    "otpEmailRequired": MessageLookupByLibrary.simpleMessage(
+      "Enter the code that we sent to your email to verify your account",
+    ),
+    "otpEmailValidation": MessageLookupByLibrary.simpleMessage(
+      "OTP must be 4 digits",
+    ),
+    "otpIsNotCorrect": MessageLookupByLibrary.simpleMessage(
+      "Your Code is not correct",
+    ),
     "otpPhoneRequired": MessageLookupByLibrary.simpleMessage(
       "Enter the code that we sent to your phone number to verify your account",
     ),
@@ -140,6 +149,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "OTP must be 4 digits",
     ),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
+    "passwordChangedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Password changed successfully",
+    ),
     "passwordDoNotMatch": MessageLookupByLibrary.simpleMessage(
       "Password do not match",
     ),

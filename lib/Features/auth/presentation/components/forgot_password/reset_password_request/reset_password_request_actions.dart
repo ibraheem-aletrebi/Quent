@@ -13,12 +13,16 @@ class ResetPasswordRequestActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ForgotPasswordFlowCubit>();
-
     return Column(
       children: [
-        CustomButton(
-          text: S.of(context).submit,
-          onPressed: cubit.verifyEmail,
+        BlocBuilder<ForgotPasswordFlowCubit, ForgotPasswordFlowState>(
+          builder: (context, state) {
+            return CustomButton(
+              isLoading: state is Loading,
+              text: S.of(context).submit,
+              onPressed: cubit.forgotPasswordRequest,
+            );
+          },
         ),
         SizedBox(height: AppSize.s32),
         TextButton(

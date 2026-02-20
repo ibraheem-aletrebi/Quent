@@ -14,79 +14,37 @@ final class ForgotPasswordInitial extends ForgotPasswordFlowState {}
 
 final class Loading extends ForgotPasswordFlowState {}
 
-
-final class EmailVerificationSuccess extends ForgotPasswordFlowState {
-  final String email;
-
-  const EmailVerificationSuccess(this.email);
-
-  @override
-  List<Object?> get props => [email];
+final class ForgotPasswordRequestSuccess extends ForgotPasswordFlowState {
+  final ForgotPasswordResponseModel forgotPasswordResponseModel;
+  const ForgotPasswordRequestSuccess({required this.forgotPasswordResponseModel});
 }
 
-final class EmailVerificationError extends ForgotPasswordFlowState {
-  final String message;
-
-  const EmailVerificationError(this.message);
-
-  @override
-  List<Object?> get props => [message];
+final class Failure extends ForgotPasswordFlowState {
+  final ApiErrorModel error;
+  const Failure({required this.error});
 }
-
-
-
-final class OtpVerificationLoading extends ForgotPasswordFlowState {}
 
 final class OtpVerificationSuccess extends ForgotPasswordFlowState {
-  final String otp; 
-
-  const OtpVerificationSuccess(this.otp);
-
-  @override
-  List<Object?> get props => [otp];
+  const OtpVerificationSuccess();
 }
-
 final class OtpVerificationError extends ForgotPasswordFlowState {
-  final String message;
-
-  const OtpVerificationError(this.message);
-
-  @override
-  List<Object?> get props => [message];
+  const OtpVerificationError();
 }
 
 
-final class ResendOtpLoading extends ForgotPasswordFlowState {}
 
 final class ResendOtpSuccess extends ForgotPasswordFlowState {
-  final String otp;
-
-  const ResendOtpSuccess(this.otp);
-
-  @override
-  List<Object?> get props => [otp];
+  final ForgotPasswordResponseModel forgotPasswordResponseModel;
+  const ResendOtpSuccess({required this.forgotPasswordResponseModel});
 }
 
 final class ResendOtpError extends ForgotPasswordFlowState {
   final String message;
-
   const ResendOtpError(this.message);
-
   @override
   List<Object?> get props => [message];
 }
-
-
-final class ResetPasswordLoading extends ForgotPasswordFlowState {}
 
 final class ResetPasswordSuccess extends ForgotPasswordFlowState {}
 
-final class ResetPasswordError extends ForgotPasswordFlowState {
-  final String message;
-
-  const ResetPasswordError(this.message);
-
-  @override
-  List<Object?> get props => [message];
-}
 

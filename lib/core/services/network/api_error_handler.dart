@@ -1,3 +1,5 @@
+import 'dart:developer';
+import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:quent/core/services/network/api_error_factory.dart';
@@ -10,73 +12,85 @@ class ApiErrorHandler {
   factory ApiErrorHandler() => instance;
 
   ApiErrorModel handle(dynamic e) {
-    if (e is Exception) {
-      if (e is DioException) {
-        switch (e.type) {
-          case DioExceptionType.connectionTimeout:
-            return ApiErrorModel(
-              message: 'Connection timed out.',
-              action: 'Please check your internet connection and try again.',
-              icon: Icons.wifi_off,
-              statusCode: ApiLocalStatusCode.connectionTimeout,
-            );
+    if (e is! Exception) {
+      return ApiErrorFactory.defaultError;
+    }
+    if (e is DioException) {
+      log('DioException: ${e.message}');
+      log('Response: ${e.response}');
 
-          case DioExceptionType.sendTimeout:
-            return ApiErrorModel(
-              message: 'Request took too long to send.',
-              action:
-                  'Please retry. If the problem persists, check your connection.',
-              icon: Icons.file_upload_off,
-              statusCode: ApiLocalStatusCode.sendTimeout,
-            );
+      switch (e.type) {
+        case DioExceptionType.connectionTimeout:
+          return _buildError(
+            message: 'Connection timed out.',
+            action: 'Please check your internet connection and try again.',
+            icon: Icons.wifi_off,
+            code: ApiLocalStatusCode.connectionTimeout,
+          );
 
-          case DioExceptionType.receiveTimeout:
-            return ApiErrorModel(
-              message: 'Server is taking too long to respond.',
-              action: 'Please try again in a few moments.',
-              icon: Icons.hourglass_bottom,
-              statusCode: ApiLocalStatusCode.receiveTimeout,
-            );
+        case DioExceptionType.sendTimeout:
+          return _buildError(
+            message: 'Request took too long to send.',
+            action:
+                'Please retry. If the problem persists, check your connection.',
+            icon: Icons.file_upload_off,
+            code: ApiLocalStatusCode.sendTimeout,
+          );
 
-          case DioExceptionType.badCertificate:
-            return ApiErrorModel(
-              message: 'Secure connection failed.',
-              action: 'Please update the app or contact support.',
-              icon: Icons.security,
-              statusCode: ApiLocalStatusCode.forbidden,
-            );
+        case DioExceptionType.receiveTimeout:
+          return _buildError(
+            message: 'Server is taking too long to respond.',
+            action: 'Please try again in a few moments.',
+            icon: Icons.hourglass_bottom,
+            code: ApiLocalStatusCode.receiveTimeout,
+          );
 
-          case DioExceptionType.badResponse:
-            return _handleBadResponse(e);
+        case DioExceptionType.badCertificate:
+          return _buildError(
+            message: 'Secure connection failed.',
+            action: 'Please update the app or contact support.',
+            icon: Icons.security,
+            code: ApiLocalStatusCode.forbidden,
+          );
 
-          case DioExceptionType.cancel:
-            return ApiErrorModel(
-              message: 'Request was cancelled.',
-              action: 'Please try again if this was unexpected.',
-              icon: Icons.cancel,
-              statusCode: ApiLocalStatusCode.cancel,
-            );
+        case DioExceptionType.badResponse:
+          return _handleBadResponse(e);
 
-          case DioExceptionType.connectionError:
-            return ApiErrorModel(
+        case DioExceptionType.cancel:
+          return _buildError(
+            message: 'Request was cancelled.',
+            action: 'Please try again if this was unexpected.',
+            icon: Icons.cancel,
+            code: ApiLocalStatusCode.cancel,
+          );
+
+        case DioExceptionType.connectionError:
+          return _buildError(
+            message: 'No internet connection.',
+            action: 'Turn on WiFi or mobile data and try again.',
+            icon: Icons.wifi_off,
+            code: ApiLocalStatusCode.connectionError,
+          );
+
+        case DioExceptionType.unknown:
+          if (e.error is SocketException) {
+            return _buildError(
               message: 'No internet connection.',
-              action: 'Turn on WiFi or mobile data and try again.',
+              action: 'Check your network and try again.',
               icon: Icons.wifi_off,
-              statusCode: ApiLocalStatusCode.connectionError,
+              code: ApiLocalStatusCode.connectionError,
             );
+          }
 
-          case DioExceptionType.unknown:
-            return ApiErrorModel(
-              message: 'Unexpected error occurred.',
-              action: 'Please try again later.',
-              icon: Icons.error_outline,
-              statusCode: ApiLocalStatusCode.unknown,
-            );
-        }
-      } else {
-        return ApiErrorFactory.defaultError;
+          return _buildError(
+            message: 'Unexpected error occurred.',
+            action: 'Please try again later.',
+            icon: Icons.error_outline,
+            code: ApiLocalStatusCode.unknown,
+          );
       }
     }
+
     return ApiErrorFactory.defaultError;
   }
 
@@ -86,61 +100,90 @@ class ApiErrorHandler {
 
     switch (statusCode) {
       case 400:
-        if (data != null && data['error'] != null) {
-          return ApiErrorModel(
-            message: data['error']['email'][0],
-            action: 'Please check your input and try again.',
-            icon: Icons.warning_amber_rounded,
-            statusCode: ApiLocalStatusCode.badRequest,
-          );
-        }
-
-        return ApiErrorModel(
-          message: 'Invalid request.',
+        final message = _extractValidationMessage(data) ?? 'Invalid request.';
+        return _buildError(
+          message: message,
           action: 'Please check your input and try again.',
           icon: Icons.warning_amber_rounded,
-          statusCode: ApiLocalStatusCode.badRequest,
+          code: ApiLocalStatusCode.badRequest,
         );
 
       case 401:
-        return ApiErrorModel(
-          message: 'Unauthorized access.',
+        return _buildError(
+          message: 'Session expired.',
           action: 'Please login again.',
           icon: Icons.lock_outline,
-          statusCode: ApiLocalStatusCode.unauthorized,
+          code: ApiLocalStatusCode.unauthorized,
         );
 
       case 403:
-        return ApiErrorModel(
+        return _buildError(
           message: 'Access denied.',
           action: 'You do not have permission to perform this action.',
           icon: Icons.block,
-          statusCode: ApiLocalStatusCode.forbidden,
+          code: ApiLocalStatusCode.forbidden,
         );
 
       case 404:
-        return ApiErrorModel(
+        return _buildError(
           message: 'Resource not found.',
           action: 'The requested data could not be found.',
           icon: Icons.search_off,
-          statusCode: ApiLocalStatusCode.notFound,
+          code: ApiLocalStatusCode.notFound,
+        );
+
+      case 422:
+        final message = _extractValidationMessage(data) ?? 'Validation failed.';
+        return _buildError(
+          message: message,
+          action: 'Please review your input and try again.',
+          icon: Icons.rule,
+          code: ApiLocalStatusCode.badRequest,
         );
 
       case 500:
-        return ApiErrorModel(
+        return _buildError(
           message: 'Server error.',
           action: 'Please try again later.',
           icon: Icons.cloud_off,
-          statusCode: ApiLocalStatusCode.internalServerError,
+          code: ApiLocalStatusCode.internalServerError,
         );
 
       default:
-        return ApiErrorModel(
+        return _buildError(
           message: 'Unexpected server error.',
           action: 'Please try again later.',
           icon: Icons.error_outline,
-          statusCode: ApiLocalStatusCode.defaultError,
+          code: ApiLocalStatusCode.defaultError,
         );
     }
+  }
+
+  String? _extractValidationMessage(dynamic data) {
+    if (data is Map<String, dynamic>) {
+      final errors = data['error'];
+      if (errors is Map<String, dynamic>) {
+        for (final value in errors.values) {
+          if (value is List && value.isNotEmpty) {
+            return value.first.toString();
+          }
+        }
+      }
+    }
+    return null;
+  }
+
+  ApiErrorModel _buildError({
+    required String message,
+    required String action,
+    required IconData icon,
+    required ApiLocalStatusCode code,
+  }) {
+    return ApiErrorModel(
+      message: message,
+      action: action,
+      icon: icon,
+      statusCode: code,
+    );
   }
 }

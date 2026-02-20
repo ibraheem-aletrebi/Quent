@@ -111,4 +111,16 @@ class FormValidators {
 
     return null;
   }
+
+  static String? otpEmailVerify(
+    String? value,
+    String emptyMessage,
+    String invalidMessage,
+  ) {
+    if (value == null || value.isEmpty) return emptyMessage;
+
+    final pattern = RegExp(r'^\d{4}$');
+    if (!pattern.hasMatch(value)) return invalidMessage;    
+    return null;
+  }
 }

@@ -15,7 +15,18 @@ class ResetPasswordOtpActions extends StatelessWidget {
 
     return Column(
       children: [
-        CustomButton(text: S.of(context).next, onPressed: cubit.verifyOtp),
+        BlocBuilder<ForgotPasswordFlowCubit, ForgotPasswordFlowState>(
+          bloc: cubit,
+          builder: (context, state) {
+            return CustomButton(
+              isLoading: state is Loading,
+              text: S.of(context).next,
+              onPressed: () {
+                cubit.verifyOtp();
+              },
+            );
+          },
+        ),
         SizedBox(height: AppSize.s32),
         ResendOtpButton(
           resendText: S.of(context).resetPasswordOtpResend,

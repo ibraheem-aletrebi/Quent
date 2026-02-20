@@ -17,7 +17,6 @@ class ResetNewPasswordView extends StatelessWidget {
           title: S.of(context).resetPasswordNewPasswordTitle,
           body: S.of(context).resetPasswordNewPasswordSubtitle,
         ),
-
         SizedBox(height: AppSize.s32),
         ResetNewPasswordForm(),
         SizedBox(height: AppSize.s32),

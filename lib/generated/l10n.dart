@@ -798,6 +798,46 @@ class S {
   String get copy {
     return Intl.message('Copy', name: 'copy', desc: '', args: []);
   }
+
+  /// `Enter the code that we sent to your email to verify your account`
+  String get otpEmailRequired {
+    return Intl.message(
+      'Enter the code that we sent to your email to verify your account',
+      name: 'otpEmailRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OTP must be 4 digits`
+  String get otpEmailValidation {
+    return Intl.message(
+      'OTP must be 4 digits',
+      name: 'otpEmailValidation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Code is not correct`
+  String get otpIsNotCorrect {
+    return Intl.message(
+      'Your Code is not correct',
+      name: 'otpIsNotCorrect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password changed successfully`
+  String get passwordChangedSuccessfully {
+    return Intl.message(
+      'Password changed successfully',
+      name: 'passwordChangedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -19,7 +19,7 @@ class ResetPasswordOtpView extends StatelessWidget {
           body: S.of(context).resetPasswordOtpSubtitle,
         ),
         SizedBox(height: AppSize.s32),
-        EmailVerifyOtpForm(),
+        Center(child: EmailVerifyOtpForm()),
         SizedBox(height: AppSize.s32),
         ResetPasswordOtpActions(),
       ],

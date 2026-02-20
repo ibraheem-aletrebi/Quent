@@ -85,9 +85,12 @@
   "countryRequired": "Please select a country",
   "locationRequired": "Please select a location",
   "signupSuccess": "Success! Your account has been created",
-  "loginSuccess":"Login successful! Welcome back ",
+  "loginSuccess": "Login successful! Welcome back ",
   "otpPhoneRequired": "Enter the code that we sent to your phone number to verify your account",
   "otpValidation": "OTP must be 4 digits",
-  "copy": "Copy"
-
+  "copy": "Copy",
+  "otpEmailRequired": "Enter the code that we sent to your email to verify your account",
+  "otpEmailValidation": "OTP must be 4 digits",
+  "otpIsNotCorrect": "Your Code is not correct",
+  "passwordChangedSuccessfully": "Password changed successfully"
 }

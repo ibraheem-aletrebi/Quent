@@ -91,11 +91,20 @@ class SignupCubit extends Cubit<SignupState> {
           access: data.tokens.access,
           refresh: data.tokens.refresh,
         );
-        final verifyResult = await repo.verifyPhone(phone: phoneController.text.trim());
+        final verifyResult = await repo.verifyPhone(
+          phone: phoneController.text.trim(),
+        );
         verifyResult.when(
           onSuccess: (data) {
-            LocalSecureStorageHelper().saveVerifyToken(data.verifyToken);
-            emit(SignUpSuccessAndPhoneVerifyCodeSent(verifyPhoneResponseModel: data));
+            LocalSecureStorageHelper().write(
+              key: SecureStorageKeys.verifyToken,
+              value: data.verifyToken,
+            );
+            emit(
+              SignUpSuccessAndPhoneVerifyCodeSent(
+                verifyPhoneResponseModel: data,
+              ),
+            );
           },
           onError: (error) {
             emit(SignupFailure(error: error));

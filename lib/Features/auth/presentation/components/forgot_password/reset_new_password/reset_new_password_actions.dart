@@ -10,9 +10,14 @@ class ResetNewPasswordActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ForgotPasswordFlowCubit>();
-    return CustomButton(
-      text: S.of(context).submit,
-      onPressed: cubit.resetPassword,
+    return BlocBuilder<ForgotPasswordFlowCubit, ForgotPasswordFlowState>(
+      builder: (context, state) {
+        return CustomButton(
+          isLoading: state is Loading,
+          text: S.of(context).submit,
+          onPressed: cubit.resetPassword,
+        );
+      },
     );
   }
 }

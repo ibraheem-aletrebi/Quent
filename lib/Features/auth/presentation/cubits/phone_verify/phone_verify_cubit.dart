@@ -23,7 +23,7 @@ class PhoneVerifyCubit extends Cubit<PhoneVerifyState> {
     final result = await repo.verifyPhone(phone: phone!);
     result.when(
       onSuccess: (data) {
-        LocalSecureStorageHelper().saveVerifyToken(data.verifyToken);
+        LocalSecureStorageHelper().write(key:SecureStorageKeys.verifyToken,value:data.verifyToken);
         emit(PhoneVerifyResendCode(verifyPhoneResponseModel: data));
       },
       onError: (error) {
@@ -33,7 +33,7 @@ class PhoneVerifyCubit extends Cubit<PhoneVerifyState> {
   }
 
   Future<void> verifyPhoneConfirm() async {
-    final verifyToken = await LocalSecureStorageHelper().getVerifyToken();
+    final verifyToken = await LocalSecureStorageHelper().read(SecureStorageKeys.verifyToken);
     if(formKey.currentState!.validate() == false) return;
     final result = await repo.verifyPhoneConfirm(verifyToken: verifyToken!, code: otpController.text.trim());
     result.when(

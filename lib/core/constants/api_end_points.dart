@@ -1,6 +1,10 @@
 class ApiEndPoints {
   // Authentication endPoints
   static const String login = '/auth/login/';
+  
+  static const String forgotPasswordRequest = '/auth/forgot_password/';
+  static const String resetPasswordRequest = '/auth/reset_password/';
+
   static const String logout = '/auth/logout/';
   static const String signup = '/auth/register/';
   static const String countries = '/public/countries';

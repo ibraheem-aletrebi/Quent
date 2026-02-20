@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:quent/Features/auth/data/models/country_response_model.dart';
+import 'package:quent/Features/auth/data/models/forgot_password_response_model.dart';
 import 'package:quent/Features/auth/data/models/location_response_model.dart';
 import 'package:quent/Features/auth/data/models/login_request_model.dart';
 import 'package:quent/Features/auth/data/models/login_response_model.dart';
 import 'package:quent/Features/auth/data/models/phone_verified_response_model.dart';
+import 'package:quent/Features/auth/data/models/reset_password_request_model.dart';
 import 'package:quent/Features/auth/data/models/signup_request_model.dart';
 import 'package:quent/Features/auth/data/models/signup_response_model.dart';
 import 'package:quent/Features/auth/data/models/verify_phone_response_model.dart';
@@ -13,7 +15,7 @@ import 'package:quent/core/services/network/api_service.dart';
 class AuthDataSource {
   final ApiService apiService;
   const AuthDataSource({required this.apiService});
-
+  // logIn
   Future<LoginResponseModel> login({
     required LoginRequestModel loginRequestMode,
   }) async {
@@ -25,10 +27,32 @@ class AuthDataSource {
     return LoginResponseModel.fromJson(response.data);
   }
 
+  // ForgetPassword
+
+  Future<ForgotPasswordResponseModel> forgotPasswordRequest({
+    required String email,
+  }) async {
+    final result = await apiService.post(
+      ApiEndPoints.forgotPasswordRequest,
+      data: {'email': email},
+    );
+    return ForgotPasswordResponseModel.fromJson(result.data);
+  }
+
+  Future<void> resetPasswordRequest({
+    required ResetPasswordRequestModel resetPasswordRequestModel,
+  }) {
+    return apiService.post(
+      ApiEndPoints.resetPasswordRequest,
+      data: resetPasswordRequestModel.toJson(),
+    );
+  }
+
   Future<void> logout() async {
     await apiService.post(ApiEndPoints.logout);
   }
 
+  // signUP
   Future<CountryResponseModel> fetchCountries({
     int page = 1,
     String? search,
@@ -62,6 +86,7 @@ class AuthDataSource {
     return SignupResponseModel.fromJson(response.data);
   }
 
+  // phone verification
   Future<VerifyPhoneResponseModel> verifyPhone({required String phone}) async {
     final Response response = await apiService.post(
       ApiEndPoints.verifyPhoneSendCode,
